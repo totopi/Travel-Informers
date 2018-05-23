@@ -1,6 +1,6 @@
 USE `x5t20wxo8nmqqxfz`;
 
-ALTER TABLE `temperature`
+ALTER TABLE `humidity`
 CHANGE COLUMN `Vancouver`	`van` TEXT NULL DEFAULT NULL ,
 CHANGE COLUMN `Portland`    `por` TEXT NULL DEFAULT NULL ,
 CHANGE COLUMN `SanFrancisco`	`sfran` TEXT NULL DEFAULT NULL , 
