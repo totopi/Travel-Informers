@@ -1,4 +1,4 @@
-
+/*
 let startCoords = [0.00, 0.00];
 let startZoom = 12;
 
@@ -16,3 +16,4 @@ let myMap = L.map('map', {
     layers: [streetMap]
 });
 L.control.layers(baseMaps).addTo(myMap);
+*/

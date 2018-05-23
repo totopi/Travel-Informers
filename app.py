@@ -5,6 +5,26 @@ app = Flask(__name__)
 @app.route("/")
 def home():
     return render_template("index.html")
+
+@app.route("/index.html")
+def index():
+    return render_template("index.html")
+
+@app.route("/crimedata.html")
+def crimedata():
+    return render_template("crimedata.html")
+
+@app.route("/hotels.html")
+def hotels():
+    return render_template("hotels.html")
+
+@app.route("/weather.html")
+def weather():
+    return render_template("weather.html")
+
+@app.route("/map.html")
+def map():
+    return render_template("map.html")
 '''
 @app.route("/scrape")
 def scrape():
