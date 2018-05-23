@@ -19,13 +19,14 @@ session = Session(engine)
 Humidity = Base.classes.humidity
 Temperature = Base.classes.temperature
 City_attributes = Base.classes.city_attributes
-
-city_list = []
-for row in session.query(City_attributes.city, City_attributes.country, City_attributes.abbr, City_attributes.latitude, City_attributes.longitude).all():
-    city_list.append({
-        "city_name": row[0],
-        "country": row[1],
-        "city_abbr": row[2],
-        "lat": row[3],
-        "lon": row[4]
-    })
+def citydata():
+    city_list = []
+    for row in session.query(City_attributes.city, City_attributes.country, City_attributes.abbr, City_attributes.latitude, City_attributes.longitude).all():
+        city_list.append({
+            "city_name": row[0],
+            "country": row[1],
+            "city_abbr": row[2],
+            "lat": float(row[3]),
+            "lon": float(row[4])
+        })
+    return city_list
