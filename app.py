@@ -1,5 +1,6 @@
 from flask import Flask, render_template, jsonify, redirect
 
+from city import citydata
 app = Flask(__name__)
 
 @app.route("/")
@@ -21,6 +22,16 @@ def hotels():
 @app.route("/weather.html")
 def weather():
     return render_template("weather.html")
+
+@app.route("/map.html")
+def map():
+    return render_template("map.html")
+
+@app.route("/city")
+def city():
+    data = citydata()
+    return jsonify(data)
+
 '''
 @app.route("/scrape")
 def scrape():
