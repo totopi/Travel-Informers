@@ -1,3 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hours of TV Watched Each Month</title>
+  <script src="https://cdn.plot.ly/plotly-1.2.0.min.js"></script>
+ 
+</head>
+<body>
+
+<div class="col-md-3">
+        <h3><strong>Select sample:</strong></h3>
+        <select id="selCity" onchange="optionChanged(this.value)"></select>
+        <div id="sampleList">
+    </div>
+    
+    <div id='timeseries'></div>
+  <script> 
 
 function DropDown() {
     let url = "/city_attributes"
@@ -13,6 +31,9 @@ function DropDown() {
             .append('option')
             .text(function (d) { return d; });
     });
+
+    
+
 
 let temp_csv = 'historical-hourly-weather-data/daily_avg_temps.csv'
 
@@ -44,3 +65,7 @@ Plotly.d3.csv(temp_csv, function(error, tempData){
     Plotly.newPlot('timeseries', data, layout)
 
 })
+
+  </script>
+</body>
+</html>

@@ -1,4 +1,5 @@
 from flask import Flask, render_template, jsonify, redirect
+import pandas as pd
 
 app = Flask(__name__)
 
@@ -21,5 +22,12 @@ def something():
 
 @app.route("/render")
 '''
+@app.route("/city_attributes")
+def city_attributes():
+    df = pd.read_csv("historical-hourly-weather-data/city_attributes.csv", index_col='City')
+    print(df.to_dict(orient='records'))
+    return jsonify(df.to_dict(orient='records'))
+
+
 if __name__ == "__main__":
     app.run(debug=True)
