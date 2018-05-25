@@ -16,8 +16,6 @@ Base = automap_base()
 Base.prepare(engine, reflect=True)
 session = Session(engine)
 
-Humidity = Base.classes.humidity
-Temperature = Base.classes.temperature
 City_attributes = Base.classes.city_attributes
 def citydata():
     city_list = []
