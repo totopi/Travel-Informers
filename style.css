@@ -1,0 +1,35 @@
+body, html {height: 100%}
+
+body,h1,h2,h3,h4,h5,h6 {font-family: "Amatic SC", sans-serif}
+
+.intro {
+    font-size: 90px
+}
+
+.weather {display: none}
+
+#bgimg {
+   background-repeat: no-repeat;
+   background-size: cover;
+   background-color: transparent;
+   background-image: url("../images/sunny_weather.jpg");
+   min-height: 100vh;
+}
+
+.select{
+    height: 50%;
+    width: 100%;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 20px;
+    background-color: #f1f1f1;
+}
+
+.select #city{
+    width: 100%;
+}
+
+.select #month{
+    width: 300px;
+}
