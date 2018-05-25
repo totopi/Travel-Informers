@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Travel Weather Map</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amatic+SC">
+        <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+    </head>
+
+    <body>
+    <!-- Navbar (on top) -->
+        <div class="w3-top w3-hide-small">
+            <div class="w3-bar w3-xlarge w3-black w3-opacity w3-hover-opacity-off" id="myNavbar">
+                <a href="#" class="w3-bar-item w3-button">HOME</a>
+                <a href="weather.html"class="w3-bar-item w3-button">WEATHER</a>
+                <a href="crimedata.html" class="w3-bar-item w3-button">CRIME DATA</a>
+                <a href="hotels.html" class="w3-bar-item w3-button">HOTELS</a>
+                <a href="#contact" class="w3-bar-item w3-button">CONTACT</a>
+            </div>
+        </div>
+    
+    <!-- intro with input -->
+        <div id="bgimg">
+        <!-- Header with image -->
+            <div class="w3-display-bottomleft w3-padding">
+                <span id="box" class="w3-tag w3-xlarge">Don't Stress, Be Prepared.</span>
+            </div>
+            <div class="w3-display-bottomright w3-center" id="title">  
+                <div class="intro">  
+                    <span class="w3-text-black w3-hide-small">PREPARE FOR YOUR TRIP!</span>
+                </div>
+            </div>
+        <!-- INPUT BOXES - still working on this -->
+            <div class="w3-display-middle w3-center">
+                <div class="select">
+                    <form>
+                        <select id="city" name="city">
+                            <option value="LA">Los Angeles</option>
+                            <option value="CH">Chicago</option>
+                            <option value="NY">New York</option>
+                        </select>
+                    </form>
+                </div>
+                <div class="select">
+                    <form>
+                        <select id="month" name="month">
+                            <option value="Jan">January</option>
+                            <option value="Feb">February</option>
+                            <option value="Mar">March</option>
+                            <option value="Apr">April</option>
+                            <option value="May">May</option>
+                            <option value="Jun">June</option>
+                            <option value="Jul">July</option>
+                            <option value="Aug">August</option>
+                            <option value="Sep">September</option>
+                            <option value="Oct">October</option>
+                            <option value="Nov">November</option>
+                            <option value="Dec">December</option>
+                        </select>
+                    </form>
+                </div>
+            </div> 
+        </div>
+
+        <!-- Contact -->
+        <div class="w3-container w3-padding-64 w3-blue-grey w3-grayscale-min w3-xlarge" id="contact">
+        <div class="w3-content">
+            <h1 class="w3-center w3-jumbo" style="margin-bottom:64px">Contact</h1>
+            <p class="w3-xxlarge"><strong>Have any questions or concerns?</strong>Send us a message!</p>
+            <form action="/action_page.php" target="_blank">
+            <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Name" required name="Name"></p>
+            <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Travel Location" required name="location"></p>
+            <p><input class="w3-input w3-padding-16 w3-border" type="datetime-local" placeholder="Date" required name="date" value="Travel Dates"></p>
+            <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Message \ Comments" required name="Message"></p>
+            <p><button class="w3-button w3-black w3-block" type="submit">SEND MESSAGE</button></p>
+            </form>
+        </div>
+        </div>
+
+        
+        <!-- Footer -->
+        <footer class="w3-center w3-black w3-padding-48 w3-xxlarge">
+        <p>Thanks for Visiting!</p>
+        </footer>
+
+<!--JavaScript-->
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
+
+            <script>
+                let tl = new TimelineLite();
+                let $img = $('#bgimg');
+
+                //Title slide
+                tl.to("#title",1,{left:'20%',top:'44%', x:0 ,xPercent:'-50',yPercent:'-50'})
+                
+                //Background Image Fade
+                TweenMax.set($img,{opacity:0});
+                TweenMax.to($img,4, {opacity:1});
+            </script>
+        </body>
+    </html>
