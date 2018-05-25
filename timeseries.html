@@ -2,18 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Hours of TV Watched Each Month</title>
+  <title>Avg Temperature TimeSeries</title>
   <script src="https://cdn.plot.ly/plotly-1.2.0.min.js"></script>
  
 </head>
 <body>
-
-<div class="col-md-3">
-        <h3><strong>Select sample:</strong></h3>
-        <select id="selCity" onchange="optionChanged(this.value)"></select>
-        <div id="sampleList">
-    </div>
-    
     <div id='timeseries'></div>
   <script> 
 
@@ -30,41 +23,42 @@ function DropDown() {
             .enter()
             .append('option')
             .text(function (d) { return d; });
-    });
+        });
+    };
 
     
 
 
-let temp_csv = 'historical-hourly-weather-data/daily_avg_temps.csv'
+    let temp_csv = 'historical-hourly-weather-data/daily_avg_temps.csv'
 
-Plotly.d3.csv(temp_csv, function(error, tempData){
+    Plotly.d3.csv(temp_csv, function(error, tempData){
 
-    if (error) console.error;
+        if (error) console.error;
 
-    console.log(tempData.keys);
+        console.log(tempData);
 
-    function unpack(rows, key){
-        return rows.map(function(row){return row[key];});
-    }
+        function unpack(rows, key){
+            return rows.map(function(row){return row[key];});
+        }
 
-    let trace1 = {
-        type: "scatter",
-        mode: "lines",
-        name: "Avg temp",
-        x: unpack(tempData, 'datetime'),
-        y: unpack(tempData, 'Los Angeles'),
-        line: {color: '#7F7F7F'}
-    }
+        let trace1 = {
+            type: "scatter",
+            mode: "lines",
+            name: "Avg temp",
+            x: unpack(tempData, 'datetime'),
+            y: unpack(tempData, 'Los Angeles'),
+            line: {color: '#7F7F7F'}
+        }
 
-    let data = [trace1]
+        let data = [trace1]
 
-    let layout = {
-        title: "Average Daily Temperature"
-    }
+        let layout = {
+            title: "Average Daily Temperature"
+        }
 
-    Plotly.newPlot('timeseries', data, layout)
+        Plotly.newPlot('timeseries', data, layout)
 
-})
+    });
 
   </script>
 </body>
