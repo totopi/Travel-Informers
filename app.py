@@ -24,8 +24,12 @@ def weather():
     return render_template("weather.html")
 
 @app.route("/map.html")
-def map():
+def maps():
     return render_template("map.html")
+
+@app.route("/timeseries.html")
+def timeseries():
+    return render_template("timeseries.html")
 
 @app.route("/city")
 def city():
