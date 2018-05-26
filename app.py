@@ -37,11 +37,11 @@ def city():
     data = city_data()
     return jsonify(data)
 
-@app.route("/<city_name>/<month>/<x>")
-def give_them_graphs(city_name, month, x):
+@app.route("/<city_name>/<month>/<x>/<y>")
+def give_them_graphs(city_name, month, x, y):
     traces = []
     traces.append(timeseries_data(city_name, month, x))
-    traces.append(scatter_data(city_name, month, x))
+    traces.append(scatter_data(city_name, month, x, y))
     traces.append(donut_data(city_name, month, x))
     return jsonify(traces)
 '''
