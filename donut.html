@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Weather Descriptions Donut Chart</title>
+  <script src="https://cdn.plot.ly/plotly-1.2.0.min.js"></script>
+	<!--fonts-->
+	<link href="https://fonts.googleapis.com/css?family=Ropa+Sans|Russo+One" rel="stylesheet">
+</head>
+<body>
+
+	<div id='graph'></div>
+	
+<script>
+filepath = "test_data/weather_descriptions.json"
+Plotly.d3.json(filepath, function(error, weatherData){
+    if (error) throw error;
+    console.log('raw data', weatherData);
+
+    let data = [{
+        values: weatherData['data'],
+        labels: weatherData['index'],
+        type: 'pie',
+        hoverinfo: 'label+percent',
+        hole: .4,
+        textinfo: 'none',
+        colorscale: 'Portland'
+      }];
+
+    let layout = {
+        height: 400,
+        width: 500,
+        title: `Weather in ${weatherData['name']}`
+      };
+      
+      Plotly.newPlot('graph', data, layout);
+    
+})
+
+
+    
+</script>
+
+
+</body>
+</html>
