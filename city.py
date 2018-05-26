@@ -17,7 +17,7 @@ Base.prepare(engine, reflect=True)
 session = Session(engine)
 
 City_attributes = Base.classes.city_attributes
-def citydata():
+def city_data():
     city_list = []
     for row in session.query(City_attributes.city, City_attributes.country, City_attributes.abbr, City_attributes.latitude, City_attributes.longitude).all():
         city_list.append({
