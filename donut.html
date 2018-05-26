@@ -24,7 +24,9 @@ Plotly.d3.json(filepath, function(error, weatherData){
         hoverinfo: 'label+percent',
         hole: .4,
         textinfo: 'none',
-        colorscale: 'Portland'
+        marker:{
+            colors:weatherData['color_codes']
+        }
       }];
 
     let layout = {

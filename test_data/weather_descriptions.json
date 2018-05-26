@@ -1,1 +1,1 @@
-{"name":"Portland","index":["light rain","sky is clear","scattered clouds","moderate rain","broken clouds","few clouds"],"data":[11,10,3,3,2,1]}
+{"name": "Los Angeles", "index": ["sky is clear", "light rain", "scattered clouds", "broken clouds", "moderate rain", "few clouds"], "data": [12, 7, 4, 3, 2, 2], "color_codes": ["rgb(251,237,99)", "rgb(160,210,219)", "rgb(92,6,99)", "rgb(142,48,99)", "rgb(160,210,219)", "rgb(132,47,99)"]}
