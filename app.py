@@ -1,6 +1,7 @@
 from flask import Flask, render_template, jsonify, redirect
 
-from city import citydata
+from city import city_data
+from dfs import timeseries_data, scatter_data, donut_data
 app = Flask(__name__)
 
 @app.route("/")
@@ -27,11 +28,22 @@ def weather():
 def map():
     return render_template("map.html")
 
+@app.route("/chart.html")
+def chart():
+    return render_template("chart.html")
+
 @app.route("/city")
 def city():
-    data = citydata()
+    data = city_data()
     return jsonify(data)
 
+@app.route("/<city_name>/<month>/<x>")
+def give_them_graphs(city_name, month, x):
+    traces = []
+    traces.append(timeseries_data(city_name, month, x))
+    traces.append(scatter_data(city_name, month, x))
+    traces.append(donut_data(city_name, month, x))
+    return jsonify(traces)
 '''
 @app.route("/scrape")
 def scrape():
