@@ -1,6 +1,6 @@
 from flask import Flask, render_template, jsonify, redirect
 
-from city import city_data
+from sqls import city_data
 from dfs import timeseries_data, scatter_data, donut_data
 app = Flask(__name__)
 
