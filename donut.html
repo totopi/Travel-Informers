@@ -4,8 +4,6 @@
   <meta charset="UTF-8">
   <title>Weather Descriptions Donut Chart</title>
   <script src="https://cdn.plot.ly/plotly-1.2.0.min.js"></script>
-	<!--fonts-->
-	<link href="https://fonts.googleapis.com/css?family=Ropa+Sans|Russo+One" rel="stylesheet">
 </head>
 <body>
 
@@ -16,6 +14,8 @@ filepath = "test_data/weather_descriptions.json"
 Plotly.d3.json(filepath, function(error, weatherData){
     if (error) throw error;
     console.log('raw data', weatherData);
+
+
 
     let data = [{
         values: weatherData['data'],
@@ -32,7 +32,7 @@ Plotly.d3.json(filepath, function(error, weatherData){
     let layout = {
         height: 400,
         width: 500,
-        title: `Weather in ${weatherData['name']}`
+        title: `Weather Descriptions`
       };
       
       Plotly.newPlot('graph', data, layout);
