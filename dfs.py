@@ -132,39 +132,53 @@ def get_descriptions(arrival, city):
 # Corey's color function
 def create_color_codes(weather_list):
     '''
-    dynamically create color codes from weather descriptions
+    dynamically create color codes from weather descriptions, probably ugly colors too
     '''
     color_codes = []
     snow_counter = 0
     storm_counter = 0
     rain_counter = 0
     clear_counter = 0
+    cloud_counter = 0
     for value in weather_list:
         try:
             if 'snow' in value:
                 color_codes.append("rgb(159,255,203)")
-                if snow_counter > 1:
-                    color_codes.append(f"rgb(159,255,{203 + snow_counter * 2})")
+                if snow_counter >= 1:
+                    color_codes.append(f"rgb(159,255,{203 + snow_counter * 10})")
                 snow_counter += 1
             elif 'storm' in value:
                 color_codes.append("rgb(16,79,85)")
-                if storm_counter > 1:
-                    color_codes.append(f"rgb({16 + storm_counter},{79 + snow_counter},85)")
+                if storm_counter >= 1:
+                    color_codes.append(f"rgb({16 + storm_counter * 10},{79 + snow_counter * 10},85)")
                 storm_counter += 1
 
             elif 'rain' in value:
                 color_codes.append("rgb(160,210,219)")
-                if rain_counter > 1:
-                    color_codes.append(f"rgb(160,{210 - rain_counter * 4},219)")
+                if rain_counter >= 1:
+                    color_codes.append(f"rgb(160,{210 - rain_counter * 20},{219 - rain_counter*20})")
                 rain_counter += 1
 
             elif 'clear' in value:
                 color_codes.append("rgb(251,237,99)")
-                if clear_counter > 1:
+                if clear_counter >= 1:
                     color_codes.append(f"rgb(251,237,{99 + clear_counter})")
                 clear_counter += 1
+                print('clear:', value)
+            elif 'clouds' in value:
+                color_codes.append("rgb(114,172,170)")
+                if cloud_counter >= 1:
+                    code = f"rgb({114 - cloud_counter * 25},{172 - cloud_counter * 25},{170 - cloud_counter * 15})"
+                    color_codes.append(code)
+                    print(code)
+                cloud_counter += 1
+                print('clouds:', value, cloud_counter)
+            elif 'haze' in value:
+                color_codes.append("rgb(197,211,119)")
+            elif 'mist' in value:
+                color_codes.append("rgb(247,189,178)")
             else:
-                color_codes.append(f"rgb({random.randint(1,150)},{random.randint(1,50)},99)")
+                color_codes.append(f"rgb({random.randint(50,200)},{random.randint(50,200)},{random.randint(50,100)})")
             
         except:
             print('nan')
