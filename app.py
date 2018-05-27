@@ -4,13 +4,18 @@ import pandas as pd
 =======
 >>>>>>> chrisprabhu
 
+from sqls import city_data
+from dfs import timeseries_data, scatter_data, donut_data
 app = Flask(__name__)
 
 @app.route("/")
 def home():
     return render_template("index.html")
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> kevin
 
 @app.route("/index.html")
 def index():
@@ -27,7 +32,31 @@ def hotels():
 @app.route("/weather.html")
 def weather():
     return render_template("weather.html")
+<<<<<<< HEAD
 >>>>>>> chrisprabhu
+=======
+
+@app.route("/map.html")
+def map():
+    return render_template("map.html")
+
+@app.route("/chart.html")
+def chart():
+    return render_template("chart.html")
+
+@app.route("/city")
+def city():
+    data = city_data()
+    return jsonify(data)
+
+@app.route("/<city_name>/<month>/<x>/<y>")
+def give_them_graphs(city_name, month, x, y):
+    traces = []
+    traces.append(timeseries_data(city_name, month, x))
+    traces.append(scatter_data(city_name, month, x, y))
+    traces.append(donut_data(city_name, month, x))
+    return jsonify(traces)
+>>>>>>> kevin
 '''
 @app.route("/scrape")
 def scrape():
