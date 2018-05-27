@@ -10,7 +10,9 @@
 	<div id='graph'></div>
 	
 <script>
-filepath = "test_data/weather_descriptions.json"
+filepath = "test_data/weather_descriptions.json" //this is just for testing
+url = "/<city_name>/<month>/<x>/<y>"
+
 Plotly.d3.json(filepath, function(error, weatherData){
     if (error) throw error;
     console.log('raw data', weatherData);

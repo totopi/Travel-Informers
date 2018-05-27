@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Avg Temperature TimeSeries</title>
+  <script src="https://cdn.plot.ly/plotly-1.2.0.min.js"></script>
+ 
+</head>
+<body>
+    <div id='scatter'></div>
+  <script> 
+    let url = "/<city_name>/<month>/<x>/<y>"
+
+    Plotly.d3.json(url, function(error, scatterData){
+        // simple plotly scatterplot
+        let airportTrace = scatterData["airportTrace"]
+        let WeatherTrace = scatterData["WeatherTrace"]
+
+        let data = [airportTrace, WeatherTrace]
+
+        let layout = {
+            title: "Airport Delays and Wind Speeds",
+            opacity: .75,
+
+        }
+
+        Plotly.newPlot('scatter', data, layout)
+
+    });
+
+  </script>
+</body>
+</html>

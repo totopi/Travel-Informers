@@ -9,8 +9,8 @@
 <body>
     <div id='timeseries'></div>
   <script> 
-    let url = 'historical-hourly-weather-data/daily_avg_temps.csv'
-
+    //let url = "/<city_name>/<month>/<x>/<y>"
+    
     Plotly.d3.json(url, function(error, tempData){
 
         if (error) console.error;
@@ -29,8 +29,10 @@
 
         Plotly.newPlot('timeseries', data, layout)
 
+       
     });
 
-  </script>
+
+    </script>
 </body>
 </html>
