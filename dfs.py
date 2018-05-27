@@ -12,6 +12,8 @@ import random
 directory = 'static/data/'
 
 def timeseries_data(city, month):
+
+    # currently using the csv files
     avg_df = pd.read_csv(directory + 'daily_avg_temps.csv')
     df = time_warp(avg_df)
     df = df[[f'{city}', 'datetime']][(df['Year'] == '2015') & (df['Month'] == month)]
@@ -51,8 +53,14 @@ def timeseries_data(city, month):
         'line': {'color': '#D95D39'}
     }
 
+    final_json = {
+        'avg_trace': avg_trace,
+        'min_trace': min_trace,
+        'max_trace':max_trace,
+    }
 
-    return [avg_trace, min_trace, max_trace]
+
+    return final_json
 
 def scatter_data(city, month, filename1, filename2):
     df = pd.read_csv(directory + filename1 + '.csv')

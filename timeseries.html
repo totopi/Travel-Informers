@@ -9,51 +9,22 @@
 <body>
     <div id='timeseries'></div>
   <script> 
+    let url = 'historical-hourly-weather-data/daily_avg_temps.csv'
 
-function DropDown() {
-    let url = "/city_attributes"
-    let dropDownList = Plotly.d3.select("selCity")
-                                
-
-    Plotly.d3.json(url, function(error, cities){
-        if (error) throw error;
-        console.log("city list", cities.keys)
-        dropDownList.selectAll('option')
-            .data(cities.keys)
-            .enter()
-            .append('option')
-            .text(function (d) { return d; });
-        });
-    };
-
-    
-
-
-    let temp_csv = 'historical-hourly-weather-data/daily_avg_temps.csv'
-
-    Plotly.d3.csv(temp_csv, function(error, tempData){
+    Plotly.d3.json(url, function(error, tempData){
 
         if (error) console.error;
 
         console.log(tempData);
 
-        function unpack(rows, key){
-            return rows.map(function(row){return row[key];});
-        }
+        avgTrace = tempData[0]
+        minTrace = tempData[1]
+        maxTrace = tempData[2]
 
-        let trace1 = {
-            type: "scatter",
-            mode: "lines",
-            name: "Avg temp",
-            x: unpack(tempData, 'datetime'),
-            y: unpack(tempData, 'Los Angeles'),
-            line: {color: '#7F7F7F'}
-        }
-
-        let data = [trace1]
+        let data = [avgTrace, minTrace, maxTrace]
 
         let layout = {
-            title: "Average Daily Temperature"
+            title: "Daily Temperature"
         }
 
         Plotly.newPlot('timeseries', data, layout)
