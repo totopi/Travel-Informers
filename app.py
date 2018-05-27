@@ -37,12 +37,18 @@ def city():
     data = city_data()
     return jsonify(data)
 
-@app.route("/<city_name>/<month>/<x>/<y>")
-def give_them_graphs(city_name, month, x, y):
+@app.route("/<city_name>/<month>/<x>")
+def give_them_graphs(city_name, month, x):
     traces = []
+    if (x == "temp"):
+        x = ["daily_avg_temps", "daily_max_temps", "daily_min_temps"]
+    elif (x == "wind"):
+        x = ["daily_2015_avg_wind", "daily_2015_max_wind", "daily_2015_min_wind"]
+    elif (x == "humidity"):
+        x = ["daily_2015_avg_humidity", "daily_2015_max_humidity", "daily_2015_min_humidity"]
     traces.append(timeseries_data(city_name, month, x))
-    traces.append(scatter_data(city_name, month, x, y))
-    traces.append(donut_data(city_name, month, x))
+    traces.append(scatter_data(city_name, month, x))
+    traces.append(donut_data(city_name, month))
     return jsonify(traces)
 '''
 @app.route("/scrape")
