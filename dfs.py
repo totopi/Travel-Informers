@@ -11,20 +11,48 @@ import random
 # Set the directory as a variable because laziness
 directory = 'static/data/'
 
-def timeseries_data(city, month, filename):
-    df = pd.read_csv(directory + filename + '.csv')
-    df = time_warp(df)
+def timeseries_data(city, month):
+    avg_df = pd.read_csv(directory + 'daily_avg_temps.csv')
+    df = time_warp(avg_df)
     df = df[[f'{city}', 'datetime']][(df['Year'] == '2015') & (df['Month'] == month)]
     df = df.to_dict('list')
-    trace = {
+    avg_trace = {
         'x': df['datetime'],
         'y': df[city],
         'type': 'scatter',
-        'name': city + ' ' + filename,
+        'name': city + ' ' + "Daily Average Temperatures",
         'mode': 'lines',
-        'line': {'color': '#123456'}
+        'line': {'color': '#87D68D'}
     }
-    return [trace]
+
+    min_df = pd.read_csv(directory + 'daily_min_temps.csv')
+    df = time_warp(min_df)
+    df = df[[f'{city}', 'datetime']][(df['Year'] == '2015') & (df['Month'] == month)]
+    df = df.to_dict('list')
+    min_trace = {
+        'x': df['datetime'],
+        'y': df[city],
+        'type': 'scatter',
+        'name': city + ' ' + "Daily Min Temperatures",
+        'mode': 'lines',
+        'line': {'color': '#87A0B2'}
+    }
+
+    max_df = pd.read_csv(directory + 'daily_max_temps.csv')
+    df = time_warp(max_df)
+    df = df[[f'{city}', 'datetime']][(df['Year'] == '2015') & (df['Month'] == month)]
+    df = df.to_dict('list')
+    max_trace = {
+        'x': df['datetime'],
+        'y': df[city],
+        'type': 'scatter',
+        'name': city + ' ' + "Daily Max Temperatures",
+        'mode': 'lines',
+        'line': {'color': '#D95D39'}
+    }
+
+
+    return [avg_trace, min_trace, max_trace]
 
 def scatter_data(city, month, filename1, filename2):
     df = pd.read_csv(directory + filename1 + '.csv')
