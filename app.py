@@ -1,7 +1,7 @@
 from flask import Flask, render_template, jsonify, redirect
 
-from sqls import city_data
-from dfs import timeseries_data, scatter_data, donut_data
+from sqls import city_data, sql_temp_timeseries_data
+from dfs import csv_timeseries_data, csv_scatter_data, donut_data
 app = Flask(__name__)
 
 @app.route("/")
@@ -32,6 +32,10 @@ def map():
 def chart():
     return render_template("chart.html")
 
+@app.route("/graphs.html")
+def graphs():
+    return render_template("graphs.html")
+
 @app.route("/city")
 def city():
     data = city_data()
@@ -41,13 +45,17 @@ def city():
 def give_them_graphs(city_name, month, x):
     traces = []
     if (x == "temp"):
+        x = ["Average Temperature", "Maximum Temperature", "Minimum Temperature"]
+        traces.append(sql_temp_timeseries_data(city_name, month, x))
         x = ["daily_avg_temps", "daily_max_temps", "daily_min_temps"]
     elif (x == "wind"):
         x = ["daily_2015_avg_wind", "daily_2015_max_wind", "daily_2015_min_wind"]
+        traces.append(csv_timeseries_data(city_name, month, x))
     elif (x == "humidity"):
         x = ["daily_2015_avg_humidity", "daily_2015_max_humidity", "daily_2015_min_humidity"]
-    traces.append(timeseries_data(city_name, month, x))
-    traces.append(scatter_data(city_name, month, x))
+        traces.append(csv_timeseries_data(city_name, month, x))
+    # traces.append(csv_timeseries_data(city_name, month, x))
+    traces.append(csv_scatter_data(city_name, month, x))
     traces.append(donut_data(city_name, month))
     return jsonify(traces)
 '''

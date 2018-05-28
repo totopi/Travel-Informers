@@ -44,7 +44,7 @@ def prepare_delays(airports, month):
         return delay_list
 #TODO Finish this up with making the trace for the scatter plot
 
-def timeseries_data(city, month, files):
+def csv_timeseries_data(city, month, files):
     traces = []
     for filename in files:
         df = pd.read_csv(directory + filename + '.csv')
@@ -55,14 +55,14 @@ def timeseries_data(city, month, files):
             'x': df['datetime'],
             'y': df[city],
             'type': 'scatter',
-            'name': city + ' ' + filename[0],
+            'name': city + ' Timeseries',
             'mode': 'lines',
             'line': {'color': '#123456'}
         }
         traces.append(trace)
     return traces
 
-def scatter_data(city, month, filename):
+def csv_scatter_data(city, month, filename):
     df = pd.read_csv(directory + filename[0] + '.csv')
     df = time_warp(df)
     df = df[[f'{city}', 'datetime']][(df['Year'] == '2015') & (df['Month'] == month)]
@@ -75,7 +75,7 @@ def scatter_data(city, month, filename):
         'x': df[city],
         'y': df2,
         'type': 'scatter',
-        'name': f'{city} {filename} vs {city} Count of Airport Delays',
+        'name': f'{city} {filename[0]} vs {city} Count of Airport Delays',
         'mode': 'markers',
         'marker': {'size': 12,
                 'symobl': 'star',

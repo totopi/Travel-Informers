@@ -24,6 +24,11 @@ Base.prepare(engine, reflect=True)
 session = Session(engine)
 
 City_attributes = Base.classes.city_attributes
+Avg_temp = Base.classes.daily_avg_temps
+Max_temp = Base.classes.daily_max_temps
+Min_temp = Base.classes.daily_min_temps
+
+temp_list = [Avg_temp, Max_temp, Min_temp]
 
 # Function to get the data needed to populate a Leaflet map, but probably we won't use it in the final product
 def city_data():
@@ -38,3 +43,22 @@ def city_data():
         })
     return city_list
 
+# Use our SQL database to return timeseries data for temperatures
+def sql_temp_timeseries_data(city, month, files):
+    traces = []
+    for i in range(3):
+        x = []
+        y = []
+        for row in session.query(getattr(temp_list[i], city), temp_list[i].datetime).filter(temp_list[i].datetime.like(f'2015-{month}%')).all():
+            x.append(row[1])
+            y.append(float(row[0]))
+        trace = {
+            'x': x,
+            'y': y,
+            'type': 'scatter',
+            'name': city + " " + files[i],
+            'mode': 'lines',
+            'line': {'color': f'#aa{str(i)}{str(i)}cc'}
+        }
+        traces.append(trace)
+    return traces
