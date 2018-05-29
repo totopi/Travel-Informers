@@ -3,6 +3,8 @@ import pandas as pd
 
 from sqls import city_data
 from dfs import timeseries_data, scatter_data, donut_data
+import json
+import random 
 app = Flask(__name__)
 
 @app.route("/")
@@ -70,7 +72,17 @@ def city_attributes():
     print(df.to_dict(orient='records'))
     return jsonify(df.to_dict(orient='records'))
 
-
+@app.route("/city_pics/<city>")
+def get_pic_urls(city):
+    """
+    queries the pic urls json file and returns a random sampling of them
+    
+    No guarenttees for trying to get more than 6 pics
+    """
+    with open('city_pics_urls.json', 'r') as f:
+        data = json.loads(f.read())
+        city_urls = data[city]
+        return jsonify(random.sample(list(city_urls),6))
 
 
 if __name__ == "__main__":
