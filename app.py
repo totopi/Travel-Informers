@@ -1,12 +1,24 @@
+# The application
+
+# Dependencies
 from flask import Flask, render_template, jsonify, redirect
 import pandas as pd
 
+<<<<<<< HEAD
 from sqls import city_data
 from dfs import timeseries_data, scatter_data, donut_data
 import json
 import random 
+=======
+# Things from other scripts that are nice
+from sqls import city_data, sql_temp_timeseries_data
+from dfs import csv_timeseries_data, csv_scatter_data, donut_data
+
+# Usual flask stuff
+>>>>>>> kevin
 app = Flask(__name__)
 
+# template file routes
 @app.route("/")
 def home():
     return render_template("index.html")
@@ -36,17 +48,35 @@ def map():
 def chart():
     return render_template("chart.html")
 
+@app.route("/graphs.html")
+def graphs():
+    return render_template("graphs.html")
+
+# This route gives you city names, countries, latitudes, and longitudes
 @app.route("/city")
 def city():
     data = city_data()
     return jsonify(data)
 
-@app.route("/<city_name>/<month>/<x>/<y>")
-def give_them_graphs(city_name, month, x, y):
+# The big daddy route, gives back 3 sets of [traces] ready to be put straight into Plotly
+@app.route("/<city_name>/<month>/<x>")
+def give_them_graphs(city_name, month, x):
     traces = []
-    traces.append(timeseries_data(city_name, month, x))
-    traces.append(scatter_data(city_name, month, x, y))
-    traces.append(donut_data(city_name, month, x))
+    if (x == "temp"):
+        # but sqlalchemy is a bit funny with variable names and stuff, so...
+        x = ["Average Temperature", "Maximum Temperature", "Minimum Temperature"]
+        traces.append(sql_temp_timeseries_data(city_name, month, x))
+        # Then switch it back for the csvs to come
+        x = ["daily_avg_temps", "daily_max_temps", "daily_min_temps"]
+    elif (x == "wind"):
+        x = ["daily_2015_avg_wind", "daily_2015_max_wind", "daily_2015_min_wind"]
+        traces.append(csv_timeseries_data(city_name, month, x))
+    elif (x == "humidity"):
+        x = ["daily_2015_avg_humidity", "daily_2015_max_humidity", "daily_2015_min_humidity"]
+        traces.append(csv_timeseries_data(city_name, month, x))
+    # traces.append(csv_timeseries_data(city_name, month, x))
+    traces.append(csv_scatter_data(city_name, month, x))
+    traces.append(donut_data(city_name, month))
     return jsonify(traces)
 
 '''

@@ -5,12 +5,15 @@
 import pandas as pd
 import numpy as np
 
+from sqls import city_data
+
 # For Corey!
 import random
 
 # Set the directory as a variable because laziness
 directory = 'static/data/'
 
+<<<<<<< HEAD
 def timeseries_data(city, month):
 
     # currently using the csv files
@@ -61,21 +64,71 @@ def timeseries_data(city, month):
 
 
     return final_json
+=======
+# Read in and reprepare (csv's don't play nicely with groupbys?) Chris Prabhu's excellently cleaned data for our scatter plot
+delays = pd.read_csv(directory + 'airport_delays.csv')
+delays = delays.groupby(['DESTINATION_AIRPORT', 'MONTH', 'DAY']).sum()
+delays = delays["ARRIVAL_DELAY"]
 
-def scatter_data(city, month, filename1, filename2):
-    df = pd.read_csv(directory + filename1 + '.csv')
+# Get our list of cities that are in the US, because our airport data is all American baby!
+cities = city_data()
+city_list = []
+for city in cities:
+    if (city['country'] == 'United States'):
+        city_list.append(city['city_name'])
+
+# Prepare our airports data to be combed
+airports = pd.read_csv(directory + 'airports.csv')
+
+# Function to pull out our airport codes from the city name
+def find_airports(city):
+    airport_list = airports[['IATA_CODE']][airports['CITY'] == city].to_dict('list')['IATA_CODE']
+    return airport_list
+
+def prepare_delays(airports, month):
+    month = int(month)
+    if len(airports) == 1:
+        delay_list = delays[[airports[0]]][month].tolist()
+        return delay_list
+    elif len(airports) == 2:
+        print(airports)
+        delay_list = (delays[airports[0]][month] + delays[airports[1]][month]).tolist()
+        return delay_list
+#TODO Finish this up with making the trace for the scatter plot
+
+def csv_timeseries_data(city, month, files):
+    traces = []
+    for filename in files:
+        df = pd.read_csv(directory + filename + '.csv')
+        df = time_warp(df)
+        df = df[[f'{city}', 'datetime']][(df['Year'] == '2015') & (df['Month'] == month)]
+        df = df.to_dict('list')
+        trace = {
+            'x': df['datetime'],
+            'y': df[city],
+            'type': 'scatter',
+            'name': city + ' Timeseries',
+            'mode': 'lines',
+            'line': {'color': '#123456'}
+        }
+        traces.append(trace)
+    return traces
+>>>>>>> kevin
+
+def csv_scatter_data(city, month, filename):
+    df = pd.read_csv(directory + filename[0] + '.csv')
     df = time_warp(df)
     df = df[[f'{city}', 'datetime']][(df['Year'] == '2015') & (df['Month'] == month)]
     df = df.to_dict('list')
-    df2 = pd.read_csv(directory + filename2 + '.csv')
-    df2 = time_warp(df2)
-    df2 = df2[[f'{city}', 'datetime']][(df2['Year'] == '2015') & (df2['Month'] == month)]
-    df2 = df2.to_dict('list')
+    airports = find_airports(city)
+    print(airports)
+    df2 = prepare_delays(airports, month)
+    print(df2)
     trace = {
         'x': df[city],
-        'y': df2[city],
+        'y': df2,
         'type': 'scatter',
-        'name': f'{city} {filename1} vs {city} {filename2}',
+        'name': f'{city} {filename[0]} vs {city} Count of Airport Delays',
         'mode': 'markers',
         'marker': {'size': 12,
                 'symobl': 'star',
@@ -84,7 +137,7 @@ def scatter_data(city, month, filename1, filename2):
     }
     return [trace]
 
-def donut_data(city, month, filename):
+def donut_data(city, month):
     # My take on Coreys code
     df = pd.read_csv(directory + 'weather_description.csv')
     df = time_warp(df)

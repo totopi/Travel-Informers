@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 /*
@@ -9,63 +10,96 @@ let startZoom = 12;
 =======
 // A test map script when I thought we might be doing a scrape and map project
 // It turns out our project changed form because things are never as free and plentiful as one would hope..
+=======
+// All the scripts!
+>>>>>>> kevin
 
-// Get the data from the route I set up in the flask app
-d3.json("/city", function(data) {
-    // Go to this function and get things
-    makeMap(data);
+// Use the route /city to populate our dropdown menu for cities
+let citySelect = document.querySelector("#citySelect");
+d3.json("/city", function(error, cities) {
+    console.log(cities);
+    if (error) throw error;
+    let longness = cities.length;
+    for (let i = 0; i < longness; i++) {
+        if (cities[i]["country"] === "United States") {
+            let city = d3.select("#selCity").append("option").attr("value", cities[i]["city_name"]).text(cities[i]["city_name"]);
+        }
+    }
 })
 >>>>>>> kevin
 
-function makeMap(data) {
-    // Takes in data, makes a map out of it
-    
-    // Let's look at that juicy data
-    console.log(data);
+// Set up the dropdown menus for month and type
+let monthText = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+let monthValue = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
+let monthSelect = document.querySelector("#monthSelect");
+for (let i = 0; i < 12; i++) {
+    let month = d3.select("#selMonth").append("option").attr("value", monthValue[i]).text(monthText[i]);
+}
+let typeText = ["Temperature", "Wind Speed", "Humidity"];
+let typeValue = ["temp", "wind", "humidity"];
+let typeSelect = document.querySelector("#typeSelect");
+for (let i = 0; i < 3; i++) {
+    let types = d3.select("#selType").append("option").attr("value", typeValue[i]).text(typeText[i]);
+}
 
-    // Make an empty list to later pushulate (not populate because pop removes things)
-    let markers = [];
-    // Loop through the data to pull out the stuff we want from each index
-    for (let i = 0, ii = data.length; i < ii; i++) {
-        // Singular of data is..
-        let datum = data[i];
+// Update things every time something changes - looking at the docs, Plotly.react is about as good as restyle but we can just feed it all of our new data instead of just what's changed
+// Which is a lot.
+function somethingChanged(something) {
+    let thisCity = document.querySelector("#selCity").value;
+    let thisMonth = document.querySelector("#selMonth").value;
+    let thisType = document.querySelector("#selType").value;
+    console.log(something);
+    url = `/${thisCity}/${thisMonth}/${thisType}`;
+    let timeSeries = document.querySelector("#first_graph");
+    let scatter = document.querySelector("#second_graph");
+    let donut = document.querySelector("#third_graph");
+    d3.json(url, function(data) {
+        Plotly.react(timeSeries, data[0]);
+        Plotly.react(scatter, data[1]);
+        Plotly.react(donut, data[2]);
+    })
+}
 
-        // Pushulate, not populate, the empty list
-        markers.push(
-            L.marker([datum.lat, datum.lon], {
-                draggable: false,
-                title: datum.city_name
-            }).bindPopup(`<strong>${datum.city_name}, ${datum.country}</strong><hr>`)
-        )
-    }
+// Initialize our graphs
+function initGraphs() {
+    let url = "/Portland/01/temp"
 
-    // Start zoomed out over the US probably
-    let startCoords = [34.052231, -118.243683];
-    let startZoom = 6;
+    d3.json(url, function(error, json) {
+        if (error) throw error;
+        // First Graph
+        let layout = {
+            title: "Temperature vs Date", 
+            xaxis: {
+                title: "Dates",
+            },
+            yaxis: {
+                title: "Temperature, Degrees Fahrenheit"
+            }
 
-    // Maps are more fun with options, but after making this I discovered the joy of the v4 mapbox maps...
-    let streetMap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/outdoors-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoidG90b3BpIiwiYSI6ImNqaDFhaGh6ejAxcW4yeHJ5aDl4bjZ2YngifQ.ssPdnszdafCcNm4753AVJA");
-    let darkMap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/dark-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoidG90b3BpIiwiYSI6ImNqaDFhaGh6ejAxcW4yeHJ5aDl4bjZ2YngifQ.ssPdnszdafCcNm4753AVJA");
+        };
+        Plotly.react('first_graph', json[0], layout);
 
-    // Typical leaflet layer control type things
-    let cityLayer = L.layerGroup(markers);
+        // Second Graph 
+        let layout2 = {
+            title: "Temperature vs Number of Airport Delays",
+            xaxis: {
+                title: "Temperature"
+            },
+            yaxis: {
+                title: "Number of Airport Delays"
+            },
+        };
 
-    let baseMaps = {
-        "Street Map": streetMap,
-        "Dark Map": darkMap
-    };
+        Plotly.react('second_graph', json[1], layout2);
 
-    let overlayMaps = {
-        "Cities": cityLayer
-    };
-
-    let myMap = L.map('map', {
-        center: startCoords,
-        zoom: startZoom,
-        layers: [streetMap, cityLayer]
+        // Third Plot
+        let pie_layout = {
+            title: "Frequency of Weather Conditions in Portland",
+            height: 700,
+            width: 800
+        };
+        Plotly.react("third_graph", json[2], pie_layout)
     });
-    L.control.layers(baseMaps, overlayMaps).addTo(myMap);
-
 }
 <<<<<<< HEAD
 let myMap = L.map('map', {
@@ -81,5 +115,10 @@ L.control.layers(baseMaps).addTo(myMap);
 >>>>>>> chrisprabhu
 =======
 
+<<<<<<< HEAD
 // Making maps is fun, but this is not the direction we ended up going in.  So far...
+>>>>>>> kevin
+=======
+// Actually call that function
+initGraphs()
 >>>>>>> kevin

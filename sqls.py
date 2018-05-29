@@ -5,6 +5,7 @@ import datetime as dt
 import numpy as np
 import pandas as pd
 
+
 import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
@@ -24,6 +25,11 @@ Base.prepare(engine, reflect=True)
 session = Session(engine)
 
 City_attributes = Base.classes.city_attributes
+Avg_temp = Base.classes.daily_avg_temps
+Max_temp = Base.classes.daily_max_temps
+Min_temp = Base.classes.daily_min_temps
+
+temp_list = [Avg_temp, Max_temp, Min_temp]
 
 # Function to get the data needed to populate a Leaflet map, but probably we won't use it in the final product
 def city_data():
@@ -38,3 +44,27 @@ def city_data():
         })
     return city_list
 
+# Use our SQL database to return timeseries data for temperatures
+def sql_temp_timeseries_data(city, month, files):
+    traces = []
+    colorlist = ['#aa00cc', '#ff4444', '#4444ff']
+    for i in range(3):
+        x = []
+        y = []
+        for row in session.query(getattr(temp_list[i], city), temp_list[i].datetime).filter(temp_list[i].datetime.like(f'%2015-{month}%')).all():
+            if (type(row[1]) == str):
+                time_converted = dt.datetime.strptime(row[1], '%Y-%m-%d')
+                x.append(time_converted)
+            elif (type(row[1] == dt.datetime)):
+                x.append(row[1])
+            y.append(float(row[0]))
+        trace = {
+            'x': x,
+            'y': y,
+            'type': 'scatter',
+            'name': city + " " + files[i],
+            'mode': 'lines',
+            'line': {'color': colorlist[i]}
+        }
+        traces.append(trace)
+    return traces
