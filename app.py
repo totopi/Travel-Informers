@@ -4,18 +4,10 @@
 from flask import Flask, render_template, jsonify, redirect
 import pandas as pd
 
-<<<<<<< HEAD
 from sqls import city_data
 from dfs import timeseries_data, scatter_data, donut_data
 import json
 import random 
-=======
-# Things from other scripts that are nice
-from sqls import city_data, sql_temp_timeseries_data
-from dfs import csv_timeseries_data, csv_scatter_data, donut_data
-
-# Usual flask stuff
->>>>>>> kevin
 app = Flask(__name__)
 
 # template file routes
@@ -107,7 +99,7 @@ def get_pic_urls(city):
     """
     queries the pic urls json file and returns a random sampling of them
     
-    No guarenttees for trying to get more than 6 pics
+    No guarenttees for trying to get more than 6 pics, so dont' change the random sample selection!!!
     """
     with open('city_pics_urls.json', 'r') as f:
         data = json.loads(f.read())

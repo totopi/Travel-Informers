@@ -13,58 +13,6 @@ import random
 # Set the directory as a variable because laziness
 directory = 'static/data/'
 
-<<<<<<< HEAD
-def timeseries_data(city, month):
-
-    # currently using the csv files
-    avg_df = pd.read_csv(directory + 'daily_avg_temps.csv')
-    df = time_warp(avg_df)
-    df = df[[f'{city}', 'datetime']][(df['Year'] == '2015') & (df['Month'] == month)]
-    df = df.to_dict('list')
-    avg_trace = {
-        'x': df['datetime'],
-        'y': df[city],
-        'type': 'scatter',
-        'name': city + ' ' + "Daily Average Temperatures",
-        'mode': 'lines',
-        'line': {'color': '#87D68D'}
-    }
-
-    min_df = pd.read_csv(directory + 'daily_min_temps.csv')
-    df = time_warp(min_df)
-    df = df[[f'{city}', 'datetime']][(df['Year'] == '2015') & (df['Month'] == month)]
-    df = df.to_dict('list')
-    min_trace = {
-        'x': df['datetime'],
-        'y': df[city],
-        'type': 'scatter',
-        'name': city + ' ' + "Daily Min Temperatures",
-        'mode': 'lines',
-        'line': {'color': '#87A0B2'}
-    }
-
-    max_df = pd.read_csv(directory + 'daily_max_temps.csv')
-    df = time_warp(max_df)
-    df = df[[f'{city}', 'datetime']][(df['Year'] == '2015') & (df['Month'] == month)]
-    df = df.to_dict('list')
-    max_trace = {
-        'x': df['datetime'],
-        'y': df[city],
-        'type': 'scatter',
-        'name': city + ' ' + "Daily Max Temperatures",
-        'mode': 'lines',
-        'line': {'color': '#D95D39'}
-    }
-
-    final_json = {
-        'avg_trace': avg_trace,
-        'min_trace': min_trace,
-        'max_trace':max_trace,
-    }
-
-
-    return final_json
-=======
 # Read in and reprepare (csv's don't play nicely with groupbys?) Chris Prabhu's excellently cleaned data for our scatter plot
 delays = pd.read_csv(directory + 'airport_delays.csv')
 delays = delays.groupby(['DESTINATION_AIRPORT', 'MONTH', 'DAY']).sum()
@@ -113,7 +61,6 @@ def csv_timeseries_data(city, month, files):
         }
         traces.append(trace)
     return traces
->>>>>>> kevin
 
 def csv_scatter_data(city, month, filename):
     df = pd.read_csv(directory + filename[0] + '.csv')
