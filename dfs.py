@@ -28,6 +28,9 @@ for city in cities:
 # Prepare our airports data to be combed
 airports = pd.read_csv(directory + 'airports.csv')
 
+# a list of colors for our timeseries
+color_list = ['#aa00aa', '#ff4444', '#4444ff']
+
 # Function to pull out our airport codes from the city name
 def find_airports(city):
     airport_list = airports[['IATA_CODE']][airports['CITY'] == city].to_dict('list')['IATA_CODE']
@@ -39,13 +42,13 @@ def prepare_delays(airports, month):
         delay_list = delays[[airports[0]]][month].tolist()
         return delay_list
     elif len(airports) == 2:
-        print(airports)
         delay_list = (delays[airports[0]][month] + delays[airports[1]][month]).tolist()
         return delay_list
 #TODO Finish this up with making the trace for the scatter plot
 
 def csv_timeseries_data(city, month, files):
     traces = []
+    i = 0
     for filename in files:
         df = pd.read_csv(directory + filename + '.csv')
         df = time_warp(df)
@@ -57,9 +60,10 @@ def csv_timeseries_data(city, month, files):
             'type': 'scatter',
             'name': city + ' Timeseries',
             'mode': 'lines',
-            'line': {'color': '#123456'}
+            'line': {'color': color_list[i]}
         }
         traces.append(trace)
+        i += 1
     return traces
 
 def csv_scatter_data(city, month, filename):
@@ -68,9 +72,9 @@ def csv_scatter_data(city, month, filename):
     df = df[[f'{city}', 'datetime']][(df['Year'] == '2015') & (df['Month'] == month)]
     df = df.to_dict('list')
     airports = find_airports(city)
-    print(airports)
+    #print(airports)
     df2 = prepare_delays(airports, month)
-    print(df2)
+    #print(df2)
     trace = {
         'x': df[city],
         'y': df2,
