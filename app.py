@@ -5,7 +5,7 @@ from flask import Flask, render_template, jsonify, redirect
 import pandas as pd
 
 from sqls import city_data
-from dfs import timeseries_data, scatter_data, donut_data
+from dfs import csv_timeseries_data, csv_scatter_data, donut_data, get_pic_urls
 import json
 import random 
 app = Flask(__name__)
@@ -95,17 +95,9 @@ def city_attributes():
     return jsonify(df.to_dict(orient='records'))
 
 @app.route("/city_pics/<city>")
-def get_pic_urls(city):
-    """
-    queries the pic urls json file and returns a random sampling of them
-    
-    No guarenttees for trying to get more than 6 pics, so dont' change the random sample selection!!!
-    """
-    with open('city_pics_urls.json', 'r') as f:
-        data = json.loads(f.read())
-        city_urls = data[city]
-        return jsonify(random.sample(list(city_urls),6))
-
+def city_collage(city):
+    urls = list(get_pic_urls(city))
+    return jsonify(urls)
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -192,6 +192,16 @@ def create_color_codes(weather_list):
             print('nan')
     return color_codes
 
+def get_pic_urls(city):
+    """
+    queries the pic urls json file and returns a random sampling of them
+    
+    No guarenttees for trying to get more than 6 pics, so dont' change the random sample selection!!!
+    """
+    with open(directory + 'city_pics_urls.json', 'r') as f:
+        data = json.loads(f.read())
+        city_urls = data[city]
+        return jsonify(random.sample(list(city_urls),6))
 
 
 # OK so things I need to have
