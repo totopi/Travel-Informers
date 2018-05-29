@@ -164,7 +164,7 @@ def create_color_codes(weather_list):
             elif 'rain' in value:
                 color_codes.append("rgb(160,210,219)")
                 if rain_counter >= 1:
-                    color_codes.append(f"rgb(160,{210 - rain_counter * 20},{219 - rain_counter*20})")
+                    color_codes.append(f"rgb({160 - rain_counter * 20},{210 - rain_counter * 20},{219 + rain_counter*20})")
                 rain_counter += 1
 
             elif 'clear' in value:
