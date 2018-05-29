@@ -9,30 +9,48 @@
 <body>
     <div id='timeseries'></div>
   <script> 
-    //let url = "/<city_name>/<month>/<x>/<y>"
+
     
-    Plotly.d3.json(url, function(error, tempData){
+
+Plotly.d3.json(, function(error, tempData){
 
         if (error) console.error;
 
         console.log(tempData);
 
-        avgTrace = tempData[0]
-        minTrace = tempData[1]
-        maxTrace = tempData[2]
+        function unpack(rows, key){
+            return rows.map(function(row){return row[key];});
+        }
 
-        let data = [avgTrace, minTrace, maxTrace]
+        let avgTrace = {
+            type: "scatter",
+            mode: "lines",
+            name: "Avg temp",
+            x: unpack(tempData, 'datetime'),
+            y: unpack(tempData, 'Los Angeles'),
+            line: {color: '#7F7F7F'}
+        }
+
+
+        let minTrace = {
+            type: "scatter",
+            mode: "lines",
+            name: "Avg temp",
+            x: unpack(tempData, 'datetime'),
+            y: unpack(tempData, 'Los Angeles'),
+            line: {color: '#7F7F7F'}
+        }
+
+        let data = [avgTrace]
 
         let layout = {
-            title: "Daily Temperature"
+            title: "Average Daily Temperature"
         }
 
         Plotly.newPlot('timeseries', data, layout)
 
-       
     });
 
-
-    </script>
+  </script>
 </body>
 </html>

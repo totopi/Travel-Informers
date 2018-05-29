@@ -27,7 +27,9 @@ Plotly.d3.json(filepath, function(error, weatherData){
         hole: .4,
         textinfo: 'none',
         marker:{
-            colors:weatherData['color_codes']
+            colors:weatherData['color_codes'],
+            borderColor:'#182825', 
+            strokeColor:'black'
         }
       }];
 
