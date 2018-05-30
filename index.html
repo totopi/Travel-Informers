@@ -11,6 +11,11 @@
     </head>
 
     <body>
+    <!--overlay loading page-->
+        <div class="overlay">
+            <div class="overlay-loader"></div>
+        </div>
+
     <!-- Navbar (on top) -->
         <div class="w3-top w3-hide-small" id="top">
             <div class="w3-bar w3-xlarge w3-black w3-opacity w3-hover-opacity-off" id="myNavbar">
@@ -21,6 +26,8 @@
                     <a href="#contact" class="w3-bar-item w3-button contactBtn">CONTACT</a>
             </div>
         </div>
+
+        
 
     <!-- intro with input -->
         <div id="bgimg">
@@ -67,17 +74,17 @@
 
         <!-- Contact -->
         <div class="w3-container w3-padding-64 w3-blue-grey w3-grayscale-min w3-xlarge" id="contact">
-        <div class="w3-content">
-            <h1 class="w3-center w3-jumbo" style="margin-bottom:64px">Contact</h1>
-            <p class="w3-xxlarge"><strong>Have any questions or concerns?</strong>Send us a message!</p>
-            <form action="/action_page.php" target="_blank">
-            <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Name" required name="Name"></p>
-            <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Travel Location" required name="location"></p>
-            <p><input class="w3-input w3-padding-16 w3-border" type="datetime-local" placeholder="Date" required name="date" value="Travel Dates"></p>
-            <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Message \ Comments" required name="Message"></p>
-            <p><button class="w3-button w3-black w3-block" type="submit">SEND MESSAGE</button></p>
-            </form>
-        </div>
+            <div class="w3-content">
+                <h1 class="w3-center w3-jumbo" style="margin-bottom:64px">Contact</h1>
+                <p class="w3-xxlarge"><strong>Have any questions or concerns?</strong>Send us a message!</p>
+                <form action="mailto:gazellebahramian@gmail.com" method="post" enctype="text/plain">
+                    <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Name" required name="Name"></p>
+                    <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Travel Location" required name="location"></p>
+                    <p><input class="w3-input w3-padding-16 w3-border" type="datetime-local" placeholder="Date" required name="date" value="Travel Dates"></p>
+                    <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Message \ Comments" required name="Message"></p>
+                    <input type="submit" class="w3-button w3-black w3-block contactsubmit" value="Send">
+                </form>
+            </div>
         </div>
 
         
@@ -93,32 +100,82 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.0/plugins/ScrollToPlugin.min.js"></script>
         
 
-            <script>
-                let tl = new TimelineLite();
-                let $img = $('#bgimg');
+        <script>
+            let tl = new TimelineLite();
+            let $img = $('#bgimg');
 
-                //Title slide
-                tl.to("#title",1,{left:'20%',top:'44%', x:0 ,xPercent:'-50',yPercent:'-50'})
-                
-                //Background Image Fade
-                TweenMax.set($img,{opacity:0});
-                TweenMax.to($img,4, {opacity:1});
-
-                //page scroll
- 
-                $(function() {
-                 
-                $(".homeBtn").bind('click', { id: '#bgimg' }, scroller);
-                $(".contactBtn").bind('click', { id: '#contact' }, scroller);
-                
-                function scroller(event){
-                    var scrollYPos = $(event.data.id).offset().top;
-                    console.log(scrollYPos)
-                    event.preventDefault();
-                    TweenLite.to(window, 2, {scrollTo:{y:scrollYPos, x:0}, ease:Power4.easeOut})
-                    }	  
-                });
+            //Title slide
+            tl.to("#title",1,{left:'20%',top:'44%', x:0 ,xPercent:'-50',yPercent:'-50'})
             
-            </script>
+            //Background Image Fade
+            TweenMax.set($img,{opacity:0});
+            TweenMax.to($img,4, {opacity:1});
+
+            //page scroll
+
+            $(function() {
+            $(".homeBtn").bind('click', { id: '#bgimg' }, scroller);
+            $(".contactBtn").bind('click', { id: '#contact' }, scroller);
+            
+            function scroller(event){
+                let scrollYPos = $(event.data.id).offset().top;
+                event.preventDefault();
+                TweenLite.to(window, 2, {scrollTo:{y:scrollYPos, x:0}, ease:Power4.easeOut})
+                }	  
+            });
+
+            // //page loading animation
+            (function() {
+
+            let btn = document.querySelector(".w3-button"),
+                overlay = document.querySelector(".overlay"),
+                loader = document.querySelector(".overlay-loader"),
+                overlayTL = new TimelineMax(),
+                loaderTL = new TimelineMax();
+
+            let animateOut = function() {
+                overlayTL.to(overlay, 0.6, {
+                bottom: "100%",
+                ease: Power4.easeInOut,
+                delay: 0.25
+                });
+                loaderTL.to(loader, 0.5, { y: "-40", opacity: 0 });
+            };
+
+            let animateOut_2 = function() {
+                overlayTL.to(overlay, 0.6, {
+                top: "100%",
+                ease: Power4.easeInOut,
+                delay: 0.25
+                });
+                loaderTL.to(loader, 0.5, { y: "40", opacity: 0 });
+            };
+
+            let animateIn = function() {
+                overlayTL.fromTo(
+                overlay,
+                0.6,
+                { top: "100%", bottom: 0 },
+                { top: 0, ease: Power4.easeInOut }
+                );
+                loaderTL.fromTo(
+                loader,
+                0.5,
+                { y: "40", opacity: 0, delay: 0.3 },
+                { y: 0, opacity: 1, delay: 0.6, ease: Power2.easeOut }
+                );
+            };
+
+            animateOut_2();
+
+            btn.onclick = function() {
+                animateIn();
+                setTimeout(animateOut_2, 2000);
+            };
+
+            })();
+
+        
+        </script>
         </body>
     </html>
