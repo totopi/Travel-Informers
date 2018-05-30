@@ -66,7 +66,10 @@ def give_them_graphs(city_name, month, x):
         x = ["daily_2015_avg_humidity", "daily_2015_max_humidity", "daily_2015_min_humidity"]
         traces.append(csv_timeseries_data(city_name, month, x))
     # traces.append(csv_timeseries_data(city_name, month, x))
-    traces.append(csv_scatter_data(city_name, month, x))
+    try:
+        traces.append(csv_scatter_data(city_name, month, x))
+    except:
+        pass
     traces.append(donut_data(city_name, month))
     return jsonify(traces)
 '''
