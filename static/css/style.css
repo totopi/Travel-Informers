@@ -1,19 +1,63 @@
-.SearchBar input {
-    height: 50px;
-    width: 500px;
-    font-size: 20px;
-}
 body, html {height: 100%}
+
 body,h1,h2,h3,h4,h5,h6 {font-family: "Amatic SC", sans-serif}
-.menu {display: none}
-.bgimg {
+
+.intro {
+    font-size: 90px
+}
+
+.weather {display: none}
+
+#bgimg {
    background-repeat: no-repeat;
    background-size: cover;
+   background-color: transparent;
    background-image: url("../images/sunny_weather.jpg");
-   min-height: 100%;
+   min-height: 100vh;
 }
-.DateSearch input {
-    height: 50px;
-    width: 300px;
+
+.select{
+    height: 50%;
+    width: 100%;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 4px;
     font-size: 20px;
+    background-color: #f1f1f1;
+}
+
+.select #city{
+    width: 100%;
+}
+
+.select #month{
+    width: 300px;
+}
+.w3-button {
+    overflow: scroll;
+    overflow-x: scroll;
+    overflow-y: scroll;
+    white-space: nowrap;
+}
+
+.overlay{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay {
+  z-index: 10;
+  background-color: black;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.overlay-loader {
+  width: 220px;
+  height: 229px;
+  background-image: url("../images/sun.jpeg");
 }

@@ -123,10 +123,19 @@ def get_pic_urls(city):
     # queries the pic urls json file and returns a random sampling of them
     #
     # No guarenttees for trying to get more than 6 pics, so dont' change the random sample selection!!!
-    with open('city_pics_urls.json', 'r') as f:
+    with open('static/data/city_pics_urls.json', 'r') as f:
         data = json.loads(f.read())
         city_urls = data[city]
         return jsonify(random.sample(list(city_urls),6))
+
+@app.route("/pic_collage.html")
+def pic_collage():
+    return render_template("pic_collage.html")
+
+@app.route("/city_pics/<city>")
+def city_collage(city):
+    urls = list(get_pic_urls(city))
+    return jsonify(urls)
 '''
 @app.route("/scrape")
 def scrape():

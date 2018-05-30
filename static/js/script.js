@@ -38,11 +38,11 @@ function somethingChanged(something) {
     let scatter = document.querySelector("#second_graph");
     let donut = document.querySelector("#third_graph");
     d3.json(url, function(data) {
-        console.log(data);
         Plotly.react(timeSeries, data[0], data[3]);
         Plotly.react(scatter, data[1], data[4]);
         Plotly.react(donut, data[2], data[5]);
     })
+    renderPics(thisCity);
 }
 
 // Initialize our graphs
@@ -60,5 +60,33 @@ function initGraphs() {
         // Third Plot
         Plotly.react("third_graph", json[2], json[5]);
     });
+    d3.json('/city_pics/Portland', function (err, urlData) {
+        if (err) throw err;
+        let picSpots = d3.select('#collage').selectAll('li')
+                        .data(urlData)
+                        .enter()
+                        .append('div')
+                        .classed('col-md-4 thumbnail img', true)
+                        .html(function(d){
+                            return `<img src="${d}">`
+                        })
+    });
 }
 initGraphs();
+
+function renderPics(city){
+    // this stuff is for when it's actually in the main page and can grab city
+    // let city = document.querySelector("#selCity").value; // idk why but I'd prefer to have city called as an argument -Kevin
+    d3.select('#collage').selectAll('div').remove();
+    let picUrl = `/city_pics/${city}`;
+    d3.json(picUrl, function (err, urlData) {
+        if (err) throw err;
+        console.log(urlData);
+        let picSpots = d3.select('#collage').selectAll('li').data(urlData);
+        picSpots.enter()
+                .append('div')
+                .classed('col-md-4 thumbnail img', true)
+                .html(d => `<img src="${d}">`)
+
+    });
+};

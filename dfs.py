@@ -10,6 +10,7 @@ from sqls import city_data
 
 # For Corey!
 import random
+import json
 
 # Set the directory as a variable because laziness
 directory = 'static/data/'
@@ -144,9 +145,9 @@ def get_descriptions(arrival, city):
 
 # Corey's color function
 def create_color_codes(weather_list):
-    '''
-    dynamically create color codes from weather descriptions
-    '''
+    #
+    # dynamically create color codes from weather descriptions
+    #
     color_codes = []
     snow_counter = 0
     storm_counter = 0
@@ -175,38 +176,12 @@ def create_color_codes(weather_list):
             print('nan')
     return color_codes
 
-# OK so things I need to have
-# A function in the app that goes to cityvar/monthvar/xvar/yvar or something
-# to feed the front end dropdowns
-
-# Functions to prepare the data for each selection
-#     so...
-#     Scatter:
-#         the trace
-#             x: variable from the weather,
-#             y: airport delays or w/e,
-#             mode: 'markers',
-#             type: 'scatter',
-#         layout
-#             title: `${x} vs Airplane Delays or W/E`
-#     Timeseries:
-#         the trace
-#             x: date column,
-#             y: temp/humidity/wind speed,
-#             type: 'scatter',
-#             mode: 'lines',
-#             name: the table it's from or w/e,
-#             line: dict(
-#                 color: '#nicecolor'
-#             )
-#     Donut:
-#         the trace
-#             values: numbers from the weather descriptors based on city for that month
-#             labels: labels from weather descriptors etc
-#             type: 'pie'
-#         layout
-#             height: a number,
-#             width: another number
-    
-# For each of these, the right csv needs to be loaded, and the data needs to 
-# be first paired down to just the city, then just the month that was selected
+def get_pic_urls(city):
+    #
+    # queries the pic urls json file and returns a random sampling of them
+    #    
+    # No guarenttees for trying to get more than 6 pics, so dont' change the random sample selection!!!
+    with open(directory + 'city_pics_urls.json', 'r') as f:
+        data = json.loads(f.read())
+        city_urls = data[city]
+        return random.sample(list(city_urls),6)
