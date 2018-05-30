@@ -154,12 +154,12 @@ def create_color_codes(weather_list):
     for value in weather_list:
         try:
             if 'snow' in value:
-                color_codes.append("rgb(159,255,203)")
+                color_codes.append("rgb(244, 255, 253)")
                 if snow_counter > 1:
                     color_codes.append(f"rgb(159,255,{203 + snow_counter * 2})")
                 snow_counter += 1
             elif 'storm' in value:
-                color_codes.append("rgb(16,79,85)")
+                color_codes.append("rgb(22, 54, 76)")
                 if storm_counter > 1:
                     color_codes.append(f"rgb({16 + storm_counter},{79 + snow_counter},85)")
                 storm_counter += 1
