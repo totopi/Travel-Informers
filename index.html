@@ -12,16 +12,16 @@
 
     <body>
     <!-- Navbar (on top) -->
-        <div class="w3-top w3-hide-small">
+        <div class="w3-top w3-hide-small" id="top">
             <div class="w3-bar w3-xlarge w3-black w3-opacity w3-hover-opacity-off" id="myNavbar">
-                <a href="#" class="w3-bar-item w3-button">HOME</a>
-                <a href="weather.html"class="w3-bar-item w3-button">WEATHER</a>
-                <a href="crimedata.html" class="w3-bar-item w3-button">CRIME DATA</a>
-                <a href="hotels.html" class="w3-bar-item w3-button">HOTELS</a>
-                <a href="#contact" class="w3-bar-item w3-button">CONTACT</a>
+                    <a id="homepage" href="#" class="w3-bar-item w3-button homeBtn">HOME</a>
+                    <a href="weather.html" class="w3-bar-item w3-button">WEATHER</a>
+                    <a href="crimedata.html" class="w3-bar-item w3-button">CRIME DATA</a>
+                    <a href="hotels.html" class="w3-bar-item w3-button">HOTELS</a>
+                    <a href="#contact" class="w3-bar-item w3-button contactBtn">CONTACT</a>
             </div>
         </div>
-    
+
     <!-- intro with input -->
         <div id="bgimg">
         <!-- Header with image -->
@@ -90,6 +90,8 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.0/plugins/ScrollToPlugin.min.js"></script>
+        
 
             <script>
                 let tl = new TimelineLite();
@@ -101,6 +103,22 @@
                 //Background Image Fade
                 TweenMax.set($img,{opacity:0});
                 TweenMax.to($img,4, {opacity:1});
+
+                //page scroll
+ 
+                $(function() {
+                 
+                $(".homeBtn").bind('click', { id: '#bgimg' }, scroller);
+                $(".contactBtn").bind('click', { id: '#contact' }, scroller);
+                
+                function scroller(event){
+                    var scrollYPos = $(event.data.id).offset().top;
+                    console.log(scrollYPos)
+                    event.preventDefault();
+                    TweenLite.to(window, 2, {scrollTo:{y:scrollYPos, x:0}, ease:Power4.easeOut})
+                    }	  
+                });
+            
             </script>
         </body>
     </html>

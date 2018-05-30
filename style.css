@@ -33,3 +33,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Amatic SC", sans-serif}
 .select #month{
     width: 300px;
 }
+/* .w3-button {
+    overflow: scroll;
+    overflow-x: scroll;
+    overflow-y: scroll;
+    white-space: nowrap;
+} */
