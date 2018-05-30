@@ -4,18 +4,10 @@
 from flask import Flask, render_template, jsonify, redirect
 import pandas as pd
 
-<<<<<<< HEAD
 from sqls import city_data
 from dfs import csv_timeseries_data, csv_scatter_data, donut_data, get_pic_urls
 import json
 import random
-=======
-# Things from other scripts that are nice
-from sqls import city_data, sql_temp_timeseries_data
-from dfs import csv_timeseries_data, csv_scatter_data, donut_data
-
-# Usual flask stuff
->>>>>>> master
 app = Flask(__name__)
 
 # template file routes
@@ -39,10 +31,6 @@ def hotels():
 def weather():
     return render_template("weather.html")
 
-<<<<<<< HEAD
-
-=======
->>>>>>> master
 @app.route("/map.html")
 def map():
     return render_template("map.html")
@@ -81,10 +69,6 @@ def give_them_graphs(city_name, month, x):
     traces.append(csv_scatter_data(city_name, month, x))
     traces.append(donut_data(city_name, month))
     return jsonify(traces)
-<<<<<<< HEAD
-
-=======
->>>>>>> master
 '''
 @app.route("/scrape")
 def scrape():

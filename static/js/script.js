@@ -1,18 +1,6 @@
-<<<<<<< HEAD
-
-
-let startCoords = [0.00, 0.00];
-let startZoom = 12;
-
-// A test map script when I thought we might be doing a scrape and map project
-// It turns out our project changed form because things are never as free and plentiful as one would hope..
 // All the scripts!
 
 
-=======
-// All the scripts!
-
->>>>>>> master
 // Use the route /city to populate our dropdown menu for cities
 let citySelect = document.querySelector("#citySelect");
 d3.json("/city", function(error, cities) {
@@ -25,7 +13,6 @@ d3.json("/city", function(error, cities) {
         }
     }
 })
-<<<<<<< HEAD
 
 
 // Set up the dropdown menus for month and type
@@ -98,60 +85,6 @@ function initGraphs() {
         };
         Plotly.react('first_graph', json[0], layout);
 
-=======
-
-// Set up the dropdown menus for month and type
-let monthText = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-let monthValue = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
-let monthSelect = document.querySelector("#monthSelect");
-for (let i = 0; i < 12; i++) {
-    let month = d3.select("#selMonth").append("option").attr("value", monthValue[i]).text(monthText[i]);
-}
-let typeText = ["Temperature", "Wind Speed", "Humidity"];
-let typeValue = ["temp", "wind", "humidity"];
-let typeSelect = document.querySelector("#typeSelect");
-for (let i = 0; i < 3; i++) {
-    let types = d3.select("#selType").append("option").attr("value", typeValue[i]).text(typeText[i]);
-}
-
-// Update things every time something changes - looking at the docs, Plotly.react is about as good as restyle but we can just feed it all of our new data instead of just what's changed
-// Which is a lot.
-function somethingChanged(something) {
-    let thisCity = document.querySelector("#selCity").value;
-    let thisMonth = document.querySelector("#selMonth").value;
-    let thisType = document.querySelector("#selType").value;
-    console.log(something);
-    url = `/${thisCity}/${thisMonth}/${thisType}`;
-    let timeSeries = document.querySelector("#first_graph");
-    let scatter = document.querySelector("#second_graph");
-    let donut = document.querySelector("#third_graph");
-    d3.json(url, function(data) {
-        Plotly.react(timeSeries, data[0]);
-        Plotly.react(scatter, data[1]);
-        Plotly.react(donut, data[2]);
-    })
-}
-
-// Initialize our graphs
-function initGraphs() {
-    let url = "/Portland/01/temp"
-
-    d3.json(url, function(error, json) {
-        if (error) throw error;
-        // First Graph
-        let layout = {
-            title: "Temperature vs Date", 
-            xaxis: {
-                title: "Dates",
-            },
-            yaxis: {
-                title: "Temperature, Degrees Fahrenheit"
-            }
-
-        };
-        Plotly.react('first_graph', json[0], layout);
-
->>>>>>> master
         // Second Graph 
         let layout2 = {
             title: "Temperature vs Number of Airport Delays",
@@ -175,22 +108,3 @@ function initGraphs() {
     });
 }
 
-<<<<<<< HEAD
-let myMap = L.map('map', {
-    center: startCoords,
-    zoom: startZoom,
-    layers: [streetMap]
-});
-L.control.layers(baseMaps).addTo(myMap);
-
-
-
-// Making maps is fun, but this is not the direction we ended up going in.  So far...
-
-// Actually call that function
-initGraphs()
-
-=======
-// Actually call that function
-initGraphs()
->>>>>>> master

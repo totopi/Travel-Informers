@@ -4,10 +4,7 @@
 # Imports
 import pandas as pd
 import numpy as np
-<<<<<<< HEAD
 import json
-=======
->>>>>>> master
 
 from sqls import city_data
 
@@ -32,12 +29,9 @@ for city in cities:
 # Prepare our airports data to be combed
 airports = pd.read_csv(directory + 'airports.csv')
 
-<<<<<<< HEAD
-=======
 # a list of colors for our timeseries
 color_list = ['#aa00aa', '#ff4444', '#4444ff']
 
->>>>>>> master
 # Function to pull out our airport codes from the city name
 def find_airports(city):
     airport_list = airports[['IATA_CODE']][airports['CITY'] == city].to_dict('list')['IATA_CODE']
@@ -49,20 +43,13 @@ def prepare_delays(airports, month):
         delay_list = delays[[airports[0]]][month].tolist()
         return delay_list
     elif len(airports) == 2:
-<<<<<<< HEAD
-        print(airports)
-=======
->>>>>>> master
         delay_list = (delays[airports[0]][month] + delays[airports[1]][month]).tolist()
         return delay_list
 #TODO Finish this up with making the trace for the scatter plot
 
 def csv_timeseries_data(city, month, files):
     traces = []
-<<<<<<< HEAD
-=======
     i = 0
->>>>>>> master
     for filename in files:
         df = pd.read_csv(directory + filename + '.csv')
         df = time_warp(df)
@@ -74,16 +61,10 @@ def csv_timeseries_data(city, month, files):
             'type': 'scatter',
             'name': city + ' Timeseries',
             'mode': 'lines',
-<<<<<<< HEAD
-            'line': {'color': '#123456'}
-        }
-        traces.append(trace)
-=======
             'line': {'color': color_list[i]}
         }
         traces.append(trace)
         i += 1
->>>>>>> master
     return traces
 
 def csv_scatter_data(city, month, filename):
@@ -92,15 +73,9 @@ def csv_scatter_data(city, month, filename):
     df = df[[f'{city}', 'datetime']][(df['Year'] == '2015') & (df['Month'] == month)]
     df = df.to_dict('list')
     airports = find_airports(city)
-<<<<<<< HEAD
-    print(airports)
-    df2 = prepare_delays(airports, month)
-    print(df2)
-=======
     #print(airports)
     df2 = prepare_delays(airports, month)
     #print(df2)
->>>>>>> master
     trace = {
         'x': df[city],
         'y': df2,
@@ -170,34 +145,17 @@ def get_descriptions(arrival, city):
 # Corey's color function
 def create_color_codes(weather_list):
     '''
-<<<<<<< HEAD
-    dynamically create color codes from weather descriptions, probably ugly colors too
-=======
     dynamically create color codes from weather descriptions
->>>>>>> master
     '''
     color_codes = []
     snow_counter = 0
     storm_counter = 0
     rain_counter = 0
     clear_counter = 0
-<<<<<<< HEAD
-    cloud_counter = 0
-=======
->>>>>>> master
     for value in weather_list:
         try:
             if 'snow' in value:
                 color_codes.append("rgb(159,255,203)")
-<<<<<<< HEAD
-                if snow_counter >= 1:
-                    color_codes.append(f"rgb(159,255,{203 + snow_counter * 10})")
-                snow_counter += 1
-            elif 'storm' in value:
-                color_codes.append("rgb(16,79,85)")
-                if storm_counter >= 1:
-                    color_codes.append(f"rgb({16 + storm_counter * 10},{79 + snow_counter * 10},85)")
-=======
                 if snow_counter > 1:
                     color_codes.append(f"rgb(159,255,{203 + snow_counter * 2})")
                 snow_counter += 1
@@ -205,54 +163,26 @@ def create_color_codes(weather_list):
                 color_codes.append("rgb(16,79,85)")
                 if storm_counter > 1:
                     color_codes.append(f"rgb({16 + storm_counter},{79 + snow_counter},85)")
->>>>>>> master
                 storm_counter += 1
 
             elif 'rain' in value:
                 color_codes.append("rgb(160,210,219)")
-<<<<<<< HEAD
-                if rain_counter >= 1:
-                    color_codes.append(f"rgb({160 - rain_counter * 20},{210 - rain_counter * 20},{219 + rain_counter*20})")
-=======
                 if rain_counter > 1:
                     color_codes.append(f"rgb(160,{210 - rain_counter * 4},219)")
->>>>>>> master
                 rain_counter += 1
 
             elif 'clear' in value:
                 color_codes.append("rgb(251,237,99)")
-<<<<<<< HEAD
-                if clear_counter >= 1:
-                    color_codes.append(f"rgb(251,237,{99 + clear_counter})")
-                clear_counter += 1
-                print('clear:', value)
-            elif 'clouds' in value:
-                color_codes.append("rgb(114,172,170)")
-                if cloud_counter >= 1:
-                    code = f"rgb({114 - cloud_counter * 25},{172 - cloud_counter * 25},{170 - cloud_counter * 15})"
-                    color_codes.append(code)
-                    print(code)
-                cloud_counter += 1
-                print('clouds:', value, cloud_counter)
-            elif 'haze' in value:
-                color_codes.append("rgb(197,211,119)")
-            elif 'mist' in value:
-                color_codes.append("rgb(247,189,178)")
-            else:
-                color_codes.append(f"rgb({random.randint(50,200)},{random.randint(50,200)},{random.randint(50,100)})")
-=======
                 if clear_counter > 1:
                     color_codes.append(f"rgb(251,237,{99 + clear_counter})")
                 clear_counter += 1
             else:
                 color_codes.append(f"rgb({random.randint(1,150)},{random.randint(1,50)},99)")
->>>>>>> master
             
         except:
             print('nan')
     return color_codes
 
-<<<<<<< HEAD
 def get_pic_urls(city):
     """
     queries the pic urls json file and returns a random sampling of them
@@ -263,8 +193,6 @@ def get_pic_urls(city):
         data = json.loads(f.read())
         city_urls = data[city]
         return random.sample(list(city_urls),6)
-=======
->>>>>>> master
 
 
 # OK so things I need to have
