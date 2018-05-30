@@ -1,6 +1,6 @@
 let url = "json.json"
 d3.json(url, function(json) {
-    
+  
     // First Graph
     let trace1 = {
         x: json[0][0]['x'],
@@ -8,7 +8,7 @@ d3.json(url, function(json) {
         name: json[0][0]['name'],
         type: json[0][0]['type'],
         mode: json[0][0]['mode'],
-        marker: json[0][0]['line']
+        marker: { color : '#226CC1' }
     };
     let trace2 = {
         x: json[0][1]['x'],
@@ -16,7 +16,7 @@ d3.json(url, function(json) {
         name: json[0][1]['name'],
         type: json[0][1]['type'],
         mode: json[0][1]['mode'],
-        marker: json[0][1]['line']
+        marker: { color : '#83727E' }
     };
     let trace3 = {
         x: json[0][2]['x'],
@@ -24,7 +24,7 @@ d3.json(url, function(json) {
         name: json[0][2]['name'],
         type: json[0][2]['type'],
         mode: json[0][2]['mode'],
-        marker: json[0][2]['line']
+        marker: { color : '#5AC523' }
     };
     let data = [trace1, trace2, trace3];
     let layout = {
@@ -34,7 +34,9 @@ d3.json(url, function(json) {
         },
         yaxis: {
             title: "Temperature, Degrees Fahrenheit"
-        }
+        },
+        paper_bgcolor:'rgba(90, 197, 35, 0.5)',
+        plot_bgcolor:'rgba(90, 197, 35, 0)'
 
     };
     Plotly.newPlot('first_graph', data, layout);
@@ -61,6 +63,8 @@ d3.json(url, function(json) {
         yaxis: {
             title: "Number of Airport Delays"
         },
+        paper_bgcolor:'rgba(90, 197, 35, 0.5)',
+        plot_bgcolor:'rgba(90, 197, 35, 0)'
     };
 
     Plotly.newPlot('second_graph', data2, layout2);
@@ -80,7 +84,9 @@ d3.json(url, function(json) {
     let pie_layout = {
         title: "Something vs Weather Conditions",
         height: 700,
-        width: 800
+        width: 800,
+        paper_bgcolor:'rgba(90, 197, 35, 0.5)',
+        plot_bgcolor:'rgba(90, 197, 35, 0)'
     };
     Plotly.newPlot("third_graph", pie_data, pie_layout)
 });
