@@ -13,13 +13,13 @@
   
   .img {
     position: relative;
-    float: left;
-    width:  100px;
-    height: 200px;
-    image-rendering: pixelated;
-    background-position: 50% 50%;
-    background-repeat:   no-repeat;
-    background-size:     cover;
+    width:  150%;
+    height: 175%;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    margin-right: 150px;
+    margin-left: 80px;
+    
 }
 
 
