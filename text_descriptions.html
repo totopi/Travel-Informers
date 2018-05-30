@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>picture collage</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" media="screen" href='static/styles.css'/>
+</head>
+<body>
+
+    <div class='row'>
+        <div class='col-md-6'>
+            <h2 class='h'>Weather Over Time</h2>
+            <p class='p'>
+                This time series shows the historical weather trends associated with the selected city and month.<br>
+                the lower line represents the daily minimums, the middle the average, and uppermost the daily maximum. <br>
+                This chart was designed using plotly's time series functionality associated with line charts. <br> 
+                Our data comes from a dataset that records the hourly weather statistics from 2012 to 2017. <br>
+                We aggregated the daily values into daily averages while preservering the minimal and max values for a given day. <br>
+                link to datasource: <a href="https://www.kaggle.com/selfishgene/historical-hourly-weather-data">Kaggle.com</a>
+            </p>
+            
+        </div>
+        <div class='col-md-6'>
+            <h2 class='h'>Qualitative Weather Donut</h2>
+            <p class='p'>
+                Included in our <a href="https://www.kaggle.com/selfishgene/historical-hourly-weather-data">dataset</a> are qualitative <br>
+                descriptions of daily weather conditions for each city. The donut chart displays these values for the selected month. <br>
+                Coloring for each slice is dynamically generated so that like values e.g "light rain" or "heavy rain" have a similar color scheme <br>
+                yet differ in hue to distinguish them. 
+            
+            </p>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col-md-12'>
+            <h2 class='h'>Airport Delays Scatter Chart</h2>
+            <p class='p'>
+                We were also able to access airport delay data. We indexed the data against the cities we have 
+            </p>
+        </div>
+        
+
+    </div>
+
+
+
+</body>
+</html>
