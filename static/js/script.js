@@ -3,7 +3,6 @@
 // Use the route /city to populate our dropdown menu for cities
 let citySelect = document.querySelector("#citySelect");
 d3.json("/city", function(error, cities) {
-    console.log(cities);
     if (error) throw error;
     let longness = cities.length;
     for (let i = 0; i < longness; i++) {
@@ -39,53 +38,27 @@ function somethingChanged(something) {
     let scatter = document.querySelector("#second_graph");
     let donut = document.querySelector("#third_graph");
     d3.json(url, function(data) {
-        Plotly.react(timeSeries, data[0]);
-        Plotly.react(scatter, data[1]);
-        Plotly.react(donut, data[2]);
+        console.log(data);
+        Plotly.react(timeSeries, data[0], data[3]);
+        Plotly.react(scatter, data[1], data[4]);
+        Plotly.react(donut, data[2], data[5]);
     })
 }
 
 // Initialize our graphs
 function initGraphs() {
-    let url = "/Portland/01/temp"
+    let url = `/Portland/01/temp`;
 
     d3.json(url, function(error, json) {
         if (error) throw error;
         // First Graph
-        let layout = {
-            title: "Temperature vs Date", 
-            xaxis: {
-                title: "Dates",
-            },
-            yaxis: {
-                title: "Temperature, Degrees Fahrenheit"
-            }
-
-        };
-        Plotly.react('first_graph', json[0], layout);
+        Plotly.react('first_graph', json[0], json[3]);
 
         // Second Graph 
-        let layout2 = {
-            title: "Temperature vs Number of Airport Delays",
-            xaxis: {
-                title: "Temperature"
-            },
-            yaxis: {
-                title: "Number of Airport Delays"
-            },
-        };
-
-        Plotly.react('second_graph', json[1], layout2);
+        Plotly.react('second_graph', json[1], json[4]);
 
         // Third Plot
-        let pie_layout = {
-            title: "Frequency of Weather Conditions in Portland",
-            height: 700,
-            width: 800
-        };
-        Plotly.react("third_graph", json[2], pie_layout)
+        Plotly.react("third_graph", json[2], json[5]);
     });
 }
-
-// Actually call that function
-initGraphs()
+initGraphs();

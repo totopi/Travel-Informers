@@ -4,6 +4,7 @@
 # Imports
 import pandas as pd
 import numpy as np
+import datetime as dt
 
 from sqls import city_data
 
@@ -46,7 +47,7 @@ def prepare_delays(airports, month):
         return delay_list
 #TODO Finish this up with making the trace for the scatter plot
 
-def csv_timeseries_data(city, month, files):
+def csv_timeseries_data(city, month, files, foo):
     traces = []
     i = 0
     for filename in files:
@@ -55,10 +56,10 @@ def csv_timeseries_data(city, month, files):
         df = df[[f'{city}', 'datetime']][(df['Year'] == '2015') & (df['Month'] == month)]
         df = df.to_dict('list')
         trace = {
-            'x': df['datetime'],
+            'x': [dt.datetime.strptime(x, '%Y-%m-%d') for x in df['datetime']],
             'y': df[city],
             'type': 'scatter',
-            'name': city + ' Timeseries',
+            'name': city + ' ' + foo[i],
             'mode': 'lines',
             'line': {'color': color_list[i]}
         }
@@ -154,26 +155,18 @@ def create_color_codes(weather_list):
     for value in weather_list:
         try:
             if 'snow' in value:
-                color_codes.append("rgb(159,255,203)")
-                if snow_counter > 1:
-                    color_codes.append(f"rgb(159,255,{203 + snow_counter * 2})")
+                color_codes.append(f"rgb(159,255,{203 + snow_counter * 20})")
                 snow_counter += 1
             elif 'storm' in value:
-                color_codes.append("rgb(16,79,85)")
-                if storm_counter > 1:
-                    color_codes.append(f"rgb({16 + storm_counter},{79 + snow_counter},85)")
+                color_codes.append(f"rgb({16 + storm_counter * 10},{79 + snow_counter * 10},85)")
                 storm_counter += 1
 
             elif 'rain' in value:
-                color_codes.append("rgb(160,210,219)")
-                if rain_counter > 1:
-                    color_codes.append(f"rgb(160,{210 - rain_counter * 4},219)")
+                color_codes.append(f"rgb(160,{210 - (rain_counter * 20)},219)")
                 rain_counter += 1
 
             elif 'clear' in value:
-                color_codes.append("rgb(251,237,99)")
-                if clear_counter > 1:
-                    color_codes.append(f"rgb(251,237,{99 + clear_counter})")
+                color_codes.append(f"rgb(251,237,{99 + clear_counter * 20})")
                 clear_counter += 1
             else:
                 color_codes.append(f"rgb({random.randint(1,150)},{random.randint(1,50)},99)")
@@ -181,8 +174,6 @@ def create_color_codes(weather_list):
         except:
             print('nan')
     return color_codes
-
-
 
 # OK so things I need to have
 # A function in the app that goes to cityvar/monthvar/xvar/yvar or something
