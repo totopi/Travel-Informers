@@ -4,6 +4,7 @@
 # Imports
 import pandas as pd
 import numpy as np
+import json
 
 from sqls import city_data
 
@@ -201,7 +202,7 @@ def get_pic_urls(city):
     with open(directory + 'city_pics_urls.json', 'r') as f:
         data = json.loads(f.read())
         city_urls = data[city]
-        return jsonify(random.sample(list(city_urls),6))
+        return random.sample(list(city_urls),6)
 
 
 # OK so things I need to have

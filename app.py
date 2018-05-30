@@ -7,7 +7,7 @@ import pandas as pd
 from sqls import city_data
 from dfs import csv_timeseries_data, csv_scatter_data, donut_data, get_pic_urls
 import json
-import random 
+import random
 app = Flask(__name__)
 
 # template file routes
