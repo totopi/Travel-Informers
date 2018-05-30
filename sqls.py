@@ -47,7 +47,7 @@ def city_data():
 # Use our SQL database to return timeseries data for temperatures
 def sql_temp_timeseries_data(city, month, files):
     traces = []
-    colorlist = ['#aa00cc', '#ff4444', '#4444ff']
+    colorlist = ['#aa00aa', '#ff4444', '#4444ff']
     for i in range(3):
         x = []
         y = []
