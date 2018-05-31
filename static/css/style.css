@@ -25,20 +25,18 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Amatic SC", sans-serif}
     border: none;
     border-radius: 4px;
     font-size: 20px;
-    background-color: #f1f1f1;
+    background-color:transparent;
 }
 
-.select #city{
-    width: 100%;
+input {
+    color: black;
+}
+select {
+    width: 32%;
 }
 
-.select #month{
-    width: 300px;
-}
+
 .w3-button {
-    overflow: scroll;
-    overflow-x: scroll;
-    overflow-y: scroll;
     white-space: nowrap;
 }
 

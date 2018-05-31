@@ -96,6 +96,9 @@ def give_them_graphs(city_name, month, x):
         'yaxis': {
             'title': f'{foo}'
         },
+        'autosize': True,
+        'plot_bgcolor': '#f1f1f1',
+        'paper_bgcolor': '#f1f1f1'
     }
     scatter_layout = {
         'title': f'{foo} vs Number of Airport Delays',
@@ -104,11 +107,16 @@ def give_them_graphs(city_name, month, x):
         },
         'yaxis': {
             'title': 'Number of Airport Delays'
-        }
+        },
+        'autosize': True,
+        'plot_bgcolor': '#f1f1f1',
+        'paper_bgcolor': '#f1f1f1'
     }
     pie_layout = {
         'title': f'Frequency of Weather Conditions in {city_name}',
-        'autosize': True
+        'autosize': True,
+        'plot_bgcolor': '#f1f1f1',
+        'paper_bgcolor': '#f1f1f1'
     }
     traces.append(time_layout)
     traces.append(scatter_layout)

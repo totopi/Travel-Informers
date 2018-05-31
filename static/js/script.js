@@ -28,11 +28,10 @@ for (let i = 0; i < 3; i++) {
 
 // Update things every time something changes - looking at the docs, Plotly.react is about as good as restyle but we can just feed it all of our new data instead of just what's changed
 // Which is a lot.
-function somethingChanged(something) {
+function somethingChanged() {
     let thisCity = document.querySelector("#selCity").value;
     let thisMonth = document.querySelector("#selMonth").value;
     let thisType = document.querySelector("#selType").value;
-    console.log(something);
     url = `/${thisCity}/${thisMonth}/${thisType}`;
     let timeSeries = document.querySelector("#first_graph");
     let scatter = document.querySelector("#second_graph");
