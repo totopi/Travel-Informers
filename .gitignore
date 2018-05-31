@@ -2,3 +2,4 @@
 historical-hourly-weather-data/weather_description.csv
 data/.DS_Store
 .DS_Store
+*.pyc
