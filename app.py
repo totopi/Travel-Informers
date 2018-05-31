@@ -88,15 +88,14 @@ def give_them_graphs(city_name, month, x):
     time_layout = {
         'title': f'{foo} Over Time',
         'xaxis': {
-            'title': 'Time',
-            'tickangle': 33,
+            'tickangle': 90,
             'autotick': False,
             'tick0': 0,
             'dtick': 3
         },
         'yaxis': {
             'title': f'{foo}'
-        }
+        },
     }
     scatter_layout = {
         'title': f'{foo} vs Number of Airport Delays',
@@ -109,8 +108,7 @@ def give_them_graphs(city_name, month, x):
     }
     pie_layout = {
         'title': f'Frequency of Weather Conditions in {city_name}',
-        'height': 700,
-        'width': 800
+        'autosize': True
     }
     traces.append(time_layout)
     traces.append(scatter_layout)

@@ -66,7 +66,7 @@ function initGraphs() {
                         .data(urlData)
                         .enter()
                         .append('div')
-                        .classed('col-md-4 thumbnail img', true)
+                        .classed('w3-card', true)
                         .html(function(d){
                             return `<img src="${d}">`
                         })
@@ -85,7 +85,7 @@ function renderPics(city){
         let picSpots = d3.select('#collage').selectAll('li').data(urlData);
         picSpots.enter()
                 .append('div')
-                .classed('col-md-4 thumbnail img', true)
+                .classed('w3-card', true)
                 .html(d => `<img src="${d}">`)
 
     });
