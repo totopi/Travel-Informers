@@ -65,9 +65,10 @@ function initGraphs() {
                         .data(urlData)
                         .enter()
                         .append('div')
-                        .classed('w3-card', true)
+                        .classed('w3-container', true)
+                        .classed('w3-cell', true)
                         .html(function(d){
-                            return `<img src="${d}">`
+                            return `<img src="${d}" class="w3-image">`
                         })
     });
 }
@@ -84,8 +85,9 @@ function renderPics(city){
         let picSpots = d3.select('#collage').selectAll('li').data(urlData);
         picSpots.enter()
                 .append('div')
-                .classed('w3-card', true)
-                .html(d => `<img src="${d}">`)
+                .classed('w3-container', true)
+                .classed('w3-cell', true)
+                .html(d => `<img src="${d}" class="w3-image">`)
 
     });
 };

@@ -1,14 +1,14 @@
 # The application
 
 # Dependencies
-from flask import Flask, render_template, jsonify, redirect, request
+from flask import Flask, render_template, jsonify, redirect
 
 import json
 import random 
 
 # Things from other scripts that are nice
 from sqls import city_data, sql_temp_timeseries_data
-from dfs import csv_timeseries_data, csv_scatter_data, donut_data
+from dfs import csv_timeseries_data, csv_scatter_data, donut_data, get_pic_urls
 
 # Usual flask stuff
 app = Flask(__name__)
@@ -21,39 +21,6 @@ def home():
 @app.route("/index.html")
 def index():
     return render_template("index.html")
-
-@app.route("/crimedata.html")
-def crimedata():
-    return render_template("crimedata.html")
-
-@app.route("/hotels.html")
-def hotels():
-    return render_template("hotels.html")
-
-@app.route("/weather.html")
-def weather():
-    return render_template("weather.html")
-
-@app.route("/map.html")
-def map():
-    return render_template("map.html")
-
-@app.route("/chart.html")
-def chart():
-    return render_template("chart.html")
-
-@app.route("/graphs.html")
-def graphs():
-    # data = city_data()
-    # data = [x['city_name'] if x['country'] == 'United States' for x in data]
-    return render_template("graphs.html")
-
-# @app.route("/graphdata", methods=['GET', 'POST'])
-# def graphdata():
-#     city = request.form.get('citySelect')
-#     month = request.form.get('monthSelect')
-#     types = request.form.get('typeSelect')
-#     return render_template('graphs2.html', city=city, month=month, types=types)
 
 # This route gives you city names, countries, latitudes, and longitudes
 @app.route("/city")
@@ -124,15 +91,15 @@ def give_them_graphs(city_name, month, x):
     return jsonify(traces)
 
 # Let's get some cool picture URLs thanks to Corey Clippinger!
-@app.route("/city_pics/<city>")
-def get_pic_urls(city):
-    # queries the pic urls json file and returns a random sampling of them
-    #
-    # No guarenttees for trying to get more than 6 pics, so dont' change the random sample selection!!!
-    with open('static/data/city_pics_urls.json', 'r') as f:
-        data = json.loads(f.read())
-        city_urls = data[city]
-        return jsonify(random.sample(list(city_urls),6))
+# @app.route("/city_pics/<city>")
+# def get_pic_urls(city):
+#     # queries the pic urls json file and returns a random sampling of them
+#     #
+#     # No guarenttees for trying to get more than 6 pics, so dont' change the random sample selection!!!
+#     with open('static/data/city_pics_urls.json', 'r') as f:
+#         data = json.loads(f.read())
+#         city_urls = data[city]
+#         return jsonify(random.sample(list(city_urls),6))
 
 @app.route("/pic_collage.html")
 def pic_collage():
@@ -142,21 +109,6 @@ def pic_collage():
 def city_collage(city):
     urls = list(get_pic_urls(city))
     return jsonify(urls)
-'''
-@app.route("/scrape")
-def scrape():
-    # Get the stuff we need to get
-    return redirect("//", code=302)
 
-@app.route("/city")
-def city():
-    # Return weather information for city 
-
-@app.route("/something")
-def something():
-    # Return something
-
-@app.route("/render")
-'''
 if __name__ == "__main__":
     app.run(debug=True)

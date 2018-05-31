@@ -34,7 +34,13 @@ input {
 select {
     width: 32%;
 }
-
+img {
+    max-height: 300px; 
+    max-width: 300px;
+}
+.w3card {
+    width:300px;
+}
 
 .w3-button {
     white-space: nowrap;
