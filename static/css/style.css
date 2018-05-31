@@ -34,15 +34,10 @@ input {
 select {
     width: 32%;
 }
-img {
-    max-height: 300px; 
-    max-width: 200px;
-    object-fit: cover;
-    position: absolute;
-    bottom:0px;
-}
+
 .w3-cell {
     width:200px;
+    height:300px;
 }
 
 .w3-container {

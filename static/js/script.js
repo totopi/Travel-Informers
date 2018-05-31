@@ -63,14 +63,15 @@ function initGraphs() {
     // It took far too long to get this stuff to cooperate, I'm sure there's a better way, but thanks for the code Corey!
     d3.json('/city_pics/Portland', function (err, urlData) {
         if (err) throw err;
-        let picSpots = d3.select('#collage').selectAll('li')
+        let picSpots = d3.select('#collage').selectAll('div')
                         .data(urlData)
                         .enter()
                         .append('div')
                         .classed('w3-container', true)
                         .classed('w3-cell', true)
+                        .classed('cover', true)
                         .html(function(d){
-                            return `<img src="${d}">`
+                            return `<img src="${d}" style="height: 300px; width: 200px; object-fit: cover;">`
                         })
     });
 }
@@ -84,12 +85,12 @@ function renderPics(city){
     d3.json(picUrl, function (err, urlData) {
         if (err) throw err;
         console.log(urlData);
-        let picSpots = d3.select('#collage').selectAll('li').data(urlData);
+        let picSpots = d3.select('#collage').selectAll('div').data(urlData);
         picSpots.enter()
                 .append('div')
                 .classed('w3-container', true)
                 .classed('w3-cell', true)
-                .html(d => `<img src="${d}">`)
-
+                .classed('cover', true)
+                .html(d => `<img src="${d}" style="height: 300px; width: 200px; object-fit: cover;">`)
     });
 };
