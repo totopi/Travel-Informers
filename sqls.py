@@ -19,7 +19,7 @@ pymysql.install_as_MySQLdb()
 # Create the engine, oh no don't steal all of our SQLs please!
 engine = create_engine('mysql://nzc05xl12rgoh7ei:v1h64j9hgv2ky4g1@s3lkt7lynu0uthj8.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/x5t20wxo8nmqqxfz')
 
-# Other things that must be done becaues they must be done.  Reminds me of working in Japan
+# Other things that must be done because they must be done.
 Base = automap_base()
 Base.prepare(engine, reflect=True)
 session = Session(engine)
@@ -31,7 +31,7 @@ Min_temp = Base.classes.daily_min_temps
 
 temp_list = [Avg_temp, Max_temp, Min_temp]
 
-# Function to get the data needed to populate a Leaflet map, but probably we won't use it in the final product
+# Function to get the data needed to populate a Leaflet map, used in the final product to populate select lists!  Excitement!
 def city_data():
     city_list = []
     for row in session.query(City_attributes.city, City_attributes.country, City_attributes.abbr, City_attributes.latitude, City_attributes.longitude).all():

@@ -36,12 +36,18 @@ select {
 }
 img {
     max-height: 300px; 
-    max-width: 300px;
+    max-width: 200px;
+    object-fit: cover;
+    position: absolute;
+    bottom:0px;
 }
-.w3card {
-    width:300px;
+.w3-cell {
+    width:200px;
 }
 
+.w3-container {
+    padding: 0px;
+}
 .w3-button {
     white-space: nowrap;
 }

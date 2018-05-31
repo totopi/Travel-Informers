@@ -62,10 +62,7 @@ def give_them_graphs(city_name, month, x):
         },
         'yaxis': {
             'title': f'{foo}'
-        },
-        'autosize': True,
-        'plot_bgcolor': '#f1f1f1',
-        'paper_bgcolor': '#f1f1f1'
+        }
     }
     scatter_layout = {
         'title': f'{foo} vs Number of Airport Delays',
@@ -74,16 +71,11 @@ def give_them_graphs(city_name, month, x):
         },
         'yaxis': {
             'title': 'Number of Airport Delays'
-        },
-        'autosize': True,
-        'plot_bgcolor': '#f1f1f1',
-        'paper_bgcolor': '#f1f1f1'
+        }
     }
     pie_layout = {
         'title': f'Frequency of Weather Conditions in {city_name}',
-        'autosize': True,
-        'plot_bgcolor': '#f1f1f1',
-        'paper_bgcolor': '#f1f1f1'
+        'autosize': True
     }
     traces.append(time_layout)
     traces.append(scatter_layout)
@@ -91,16 +83,6 @@ def give_them_graphs(city_name, month, x):
     return jsonify(traces)
 
 # Let's get some cool picture URLs thanks to Corey Clippinger!
-# @app.route("/city_pics/<city>")
-# def get_pic_urls(city):
-#     # queries the pic urls json file and returns a random sampling of them
-#     #
-#     # No guarenttees for trying to get more than 6 pics, so dont' change the random sample selection!!!
-#     with open('static/data/city_pics_urls.json', 'r') as f:
-#         data = json.loads(f.read())
-#         city_urls = data[city]
-#         return jsonify(random.sample(list(city_urls),6))
-
 @app.route("/pic_collage.html")
 def pic_collage():
     return render_template("pic_collage.html")

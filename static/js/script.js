@@ -59,6 +59,8 @@ function initGraphs() {
         // Third Plot
         Plotly.react("third_graph", json[2], json[5]);
     });
+
+    // It took far too long to get this stuff to cooperate, I'm sure there's a better way, but thanks for the code Corey!
     d3.json('/city_pics/Portland', function (err, urlData) {
         if (err) throw err;
         let picSpots = d3.select('#collage').selectAll('li')
@@ -68,7 +70,7 @@ function initGraphs() {
                         .classed('w3-container', true)
                         .classed('w3-cell', true)
                         .html(function(d){
-                            return `<img src="${d}" class="w3-image">`
+                            return `<img src="${d}">`
                         })
     });
 }
@@ -87,7 +89,7 @@ function renderPics(city){
                 .append('div')
                 .classed('w3-container', true)
                 .classed('w3-cell', true)
-                .html(d => `<img src="${d}" class="w3-image">`)
+                .html(d => `<img src="${d}">`)
 
     });
 };

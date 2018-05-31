@@ -41,7 +41,7 @@
                     <a href="#first_graph_link" class="w3-bar-item w3-button firstBtn">TIMESERIES</a>
                     <a href="#second_graph_link" class="w3-bar-item w3-button secondBtn">SCATTERS</a>
                     <a href="#third_graph_link" class="w3-bar-item w3-button thirdBtn">DONUTS</a>
-                    <a href="#collage" class="w3-bar-item w3-button collageBtn">COLLAGE</a>
+                    <a href="#collage_link" class="w3-bar-item w3-button collageBtn">COLLAGE</a>
                     <a href="#aboutUs_link" class="w3-bar-item w3-button aboutBtn">ABOUT US</a>
                     <a href="#contact" class="w3-bar-item w3-button contactBtn">CONTACT</a>
             </div>
@@ -78,7 +78,7 @@
         <!-- First Graph Space -->
         <div class="w3-display-container w3-gray" id = "first_graph_link" style="width:100%; height:100%;">
             <div class="w3-display-left" id="first_graph" style="width:60%; height:60%;"></div>
-            <div class='w3-light-grey w3-display-right' style="width:40%; height: 60%">
+            <div class='w3-white w3-display-right' style="width:40%; height: 60%">
                 <div class='w3-border-red w3-bottombar'><h2 class='h'>Weather Over Time</h2></div>
                 <p class='p'>
                     This time series shows the historical weather trends associated with the selected city and month.
@@ -94,7 +94,7 @@
         <!-- Second Graph Space -->
         <div class="w3-display-container w3-gray" id = "second_graph_link" style="width:100%; height:100%;">
             <div class="w3-display-left" id="second_graph" style="width:60%; height:60%;"></div>
-            <div class='w3-light-grey w3-display-right' style="width:40%; height:60%;">
+            <div class='w3-white w3-display-right' style="width:40%; height:60%;">
                 <div class='w3-border-red w3-bottombar'><h2 class='h'>Airport Delays Scatter Chart</h2></div>
                 <p class='p'>
                     We were also able to access data on <a class='orange' href='https://www.kaggle.com/usdot/flight-delays'>airport delays</a>. We indexed the data against the cities we have
@@ -107,7 +107,7 @@
         <!-- Third Graph Space -->
         <div class="w3-display-container w3-gray" id = "third_graph_link" style="width:100%; height:100%;">
             <div class="w3-display-left w3-white" id="third_graph" style="width:60%; height:60%;"></div>
-            <div class="w3-light-grey w3-display-right" style="width:40%; height:60%;">
+            <div class="w3-white w3-display-right" style="width:40%; height:60%;">
                 <div class='w3-border-red w3-bottombar'><h2 class='h'>Qualitative Weather Donut</h2></div>            
                 <p class='p'>
                     Included in our <a class='orange' href="https://www.kaggle.com/selfishgene/historical-hourly-weather-data">dataset</a> are qualitative 
@@ -119,9 +119,10 @@
         </div>
 
         <!-- Picture Collage Space -->
-        <div class="w3-display-container">
-        <div class='w3-border-red w3-bottombar' style="margin-bottom:22px;"><h2 class='h'>Images from Wikipedia of your Destination</h2></div>      
-            <div id="collage" class="w3-cell-row"></div>
+        <div class="w3-display-container" id="collage_link" style="width:100%; height:95%;">
+            <div class="w3-display-top w3-gray" style="width:100%; height:40%;"></div>
+            <div class='w3-border-red w3-bottombar w3-display-middle' style="margin-bottom:22px;"><h2 class='h'>Images from Wikipedia of your Destination</h2></div>      
+            <div id="collage" class="w3-display-bottommiddle w3-cell-row"></div>
         </div>
 
         <div class="w3-display-container" id = "aboutUs_link" style="width:100%; height:500px;">
@@ -143,7 +144,7 @@
                 <form action="mailto:gazellebahramian@gmail.com" method="post" enctype="text/plain">
                     <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Name" required name="Name"></p>
                     <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Travel Location" required name="location"></p>
-                    <p><input class="w3-input w3-padding-16 w3-border" type="datetime-local" placeholder="Date" required name="date" value="Travel Dates"></p>
+                    <p><input class="w3-input w3-padding-16 w3-border" type="datetime-local" placeholder="Travel Dates" required name="date"></p>
                     <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Message \ Comments" required name="Message"></p>
                     <input type="submit" class="w3-button w3-black w3-block contactsubmit" value="Send">
                 </form>
@@ -181,7 +182,7 @@
             $(".firstBtn").bind('click', {id: '#first_graph_link'}, scroller);
             $(".secondBtn").bind('click', {id: '#second_graph_link'}, scroller);
             $(".thirdBtn").bind('click', {id: '#third_graph_link'}, scroller);
-            $(".collageBtn").bind('click', {id: '#collage'}, scroller);
+            $(".collageBtn").bind('click', {id: '#collage_link'}, scroller);
             $(".aboutBtn").bind('click', { id: '#aboutUs_link' }, scroller);
             $(".contactBtn").bind('click', { id: '#contact' }, scroller);
             
