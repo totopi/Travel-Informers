@@ -44,12 +44,49 @@
                                     <input type="input" placeholder="Where Do You Want To Go?" required>
                     </form>
                 </div>
-        <!-- still working on this-->
-            <div class="datesearch">
-                    <form>
-                            <input id="today" id="datepicker" />
-                            <input id="datepicker" />
-                    </form>
+            </div> 
+        </div>
+
+        <!-- First Graph Space -->
+        <div class="w3-display-container w3-white" id = "first_graph_link" style="width:100%; height:100%;">
+            <div class="w3-display-left" id="first_graph" style="width:60%; height:60%;"></div>
+            <div class='w3-light-grey w3-display-right' style="width:40%; height: 60%">
+                <div class='w3-border-red w3-bottombar'><h2 class='h'>Weather Over Time</h2></div>
+                <p class='p'>
+                    This time series shows the historical weather trends associated with the selected city and month.
+                    the lower line represents the daily minimums, the middle the average, and uppermost the daily maximum. 
+                    This chart was designed using plotly's time series functionality associated with line charts.  
+                    Our data comes from a dataset that records the hourly weather statistics from 2012 to 2017. 
+                    We aggregated the daily values into daily averages while preservering the minimal and max values for a given day. 
+                    link to datasource: <a class='orange' href="https://www.kaggle.com/selfishgene/historical-hourly-weather-data">Kaggle.com</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- Second Graph Space -->
+        <div class="w3-display-container w3-white" id = "second_graph_link" style="width:100%; height:100%;">
+            <div class="w3-display-left" id="second_graph" style="width:60%; height:60%;"></div>
+            <div class='w3-light-grey w3-display-right' style="width:40%; height:60%;">
+                <div class='w3-border-red w3-bottombar'><h2 class='h'>Airport Delays Scatter Chart</h2></div>
+                <p class='p'>
+                    We were also able to access data on <a class='orange' href='https://www.kaggle.com/usdot/flight-delays'>airport delays</a>. We indexed the data against the cities we have
+                    and have displayed in this scatter chart the unique effects weather has on the frequency of flight delays <strong>per city and month of the year</strong> users
+                    can use this information to anticipate how troublesome their flights could potentially be on say during a "snowstorm in Boston" vs. one in New York. 
+                </p>
+            </div>
+        </div>
+
+        <!-- Third Graph Space -->
+        <div class="w3-display-container w3-white" id = "third_graph_link" style="width:100%; height:100%;">
+            <div class="w3-display-left w3-white" id="third_graph" style="width:60%; height:60%;"></div>
+            <div class="w3-light-grey w3-display-right" style="width:40%; height:60%;">
+                <div class='w3-border-red w3-bottombar'><h2 class='h'>Qualitative Weather Donut</h2></div>            
+                <p class='p'>
+                    Included in our <a class='orange' href="https://www.kaggle.com/selfishgene/historical-hourly-weather-data">dataset</a> are qualitative 
+                    descriptions of daily weather conditions for each city. The donut chart displays these values for the selected month. 
+                    Coloring for each slice is dynamically generated so that like values e.g "light rain" or "heavy rain" have a similar color scheme 
+                    yet differ in hue to distinguish them. 
+                </p>
             </div>
         </div>
         </header>
@@ -57,6 +94,26 @@
             <div href='graph.html'></div>
         </body>
 
+        <!-- Picture Collage Space -->
+        <div class='w3-border-red w3-bottombar' style="margin-bottom:22px;"><h2 class='h'>Images from Wikipedia of your Destination</h2></div>
+        <div class="w3-display-container">
+            
+            <div id="collage" class='row' style="height:300px;"></div>      
+                
+        </div>
+
+        <div class="w3-display-container" id = "aboutUs_link" style="width:100%; height:200px;">
+            <div class="w3-display-bottommiddle" id="aboutUs" style="width:90%;">
+                <div class='text-center' style="margin:auto; width:500px; padding-bottom:30px;">
+                <div class='w3-border-red w3-bottombar'><h2 class='h'>About Us</h2></div>        
+                <p class='p'>
+                    This project was completed as a part of the <a class='orange' href="https://bootcamp.ce.uci.edu/data/">UCI Data Analytics Bootcamp</a>
+                    by <a class='orange' href="https://github.com/coreyclip">Corey Clippinger </a>, <a class='orange' href="https://github.com/totopi/">Kevin McNalley</a>, <a class='orange' href="https://github.com/gazellebahramian">Gazelle Bahramianfard</a>,
+                    and <a class='orange' href='https://github.com/chrisprabhu'>Chris Prabhu</a>. We used a MySQL database to store our weather and airport data, a Flask backend written in Python, and graphs and animations powered by javascript. 
+                </p>
+                </div>
+            </div>
+        </div>
 
         <!-- Contact -->
         <div class="w3-container w3-padding-64 w3-blue-grey w3-grayscale-min w3-xlarge" id="contact">
