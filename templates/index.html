@@ -38,11 +38,11 @@
         <div class="w3-top w3-hide-small" id="top">
             <div class="w3-bar w3-xlarge w3-black w3-opacity w3-hover-opacity-off" id="myNavbar">
                     <a id="homepage" href="#" class="w3-bar-item w3-button homeBtn">HOME</a>
-                    <a href="#first_graph" class="w3-bar-item w3-button firstBtn">TIMESERIES</a>
-                    <a href="#second_graph" class="w3-bar-item w3-button secondBtn">SCATTERS</a>
-                    <a href="#third_graph" class="w3-bar-item w3-button thirdBtn">DONUTS</a>
+                    <a href="#first_graph_link" class="w3-bar-item w3-button firstBtn">TIMESERIES</a>
+                    <a href="#second_graph_link" class="w3-bar-item w3-button secondBtn">SCATTERS</a>
+                    <a href="#third_graph_link" class="w3-bar-item w3-button thirdBtn">DONUTS</a>
                     <a href="#collage" class="w3-bar-item w3-button collageBtn">COLLAGE</a>
-                    <a href="#aboutUs" class="w3-bar-item w3-button aboutBtn">ABOUT US</a>
+                    <a href="#aboutUs_link" class="w3-bar-item w3-button aboutBtn">ABOUT US</a>
                     <a href="#contact" class="w3-bar-item w3-button contactBtn">CONTACT</a>
             </div>
         </div>
@@ -76,7 +76,7 @@
         </div>
 
         <!-- First Graph Space -->
-        <div class="w3-display-container w3-blue-grey" style="width:100%; height:100%;">
+        <div class="w3-display-container w3-blue-grey" id = "first_graph_link" style="width:100%; height:100%;">
             <div class="w3-display-left" id="first_graph" style="width:60%; height:60%;"></div>
             <div class='w3-light-grey w3-display-right' style="width:40%; height: 60%">
                 <div class='w3-border-red w3-bottombar'><h2 class='h'>Weather Over Time</h2></div>
@@ -92,7 +92,7 @@
         </div>
 
         <!-- Second Graph Space -->
-        <div class="w3-display-container w3-blue-grey" style="width:100%; height:100%;">
+        <div class="w3-display-container w3-blue-grey" id = "second_graph_link" style="width:100%; height:100%;">
             <div class="w3-display-left" id="second_graph" style="width:60%; height:60%;"></div>
             <div class='w3-light-grey w3-display-right' style="width:40%; height:60%;">
                 <div class='w3-border-red w3-bottombar'><h2 class='h'>Airport Delays Scatter Chart</h2></div>
@@ -105,7 +105,7 @@
         </div>
 
         <!-- Third Graph Space -->
-        <div class="w3-display-container w3-blue-grey" style="width:100%; height:100%;">
+        <div class="w3-display-container w3-blue-grey" id = "third_graph_link" style="width:100%; height:100%;">
             <div class="w3-display-left w3-white" id="third_graph" style="width:60%; height:60%;"></div>
             <div class="w3-light-grey w3-display-right" style="width:40%; height:60%;">
                 <div class='w3-border-red w3-bottombar'><h2 class='h'>Qualitative Weather Donut</h2></div>            
@@ -125,8 +125,8 @@
             </div>        
         </div>
 
-        <div class="w3-display-container">
-            <div id="aboutUs">
+        <div class="w3-display-container" id = "aboutUs_link" style="width:100%; height:500px;">
+            <div class="w3-display-bottommiddle" id="aboutUs" style="width:90%;">
                 <div class='w3-border-red w3-bottombar'><h2 class='h'>About Us</h2></div>        
                 <p class='p'>
                     This project was completed as a part of the <a class='orange' href="https://bootcamp.ce.uci.edu/data/">UCI Data Analytics Bootcamp</a>
@@ -179,11 +179,11 @@
 
             $(function() {
             $(".homeBtn").bind('click', { id: '#bgimg' }, scroller);
-            $(".firstBtn").bind('click', {id: '#first_graph'}, scroller);
-            $(".secondBtn").bind('click', {id: '#second_graph'}, scroller);
-            $(".thirdBtn").bind('click', {id: '#third_graph'}, scroller);
+            $(".firstBtn").bind('click', {id: '#first_graph_link'}, scroller);
+            $(".secondBtn").bind('click', {id: '#second_graph_link'}, scroller);
+            $(".thirdBtn").bind('click', {id: '#third_graph_link'}, scroller);
             $(".collageBtn").bind('click', {id: '#collage'}, scroller);
-            $(".aboutBtn").bind('click', { id: '#aboutUs' }, scroller);
+            $(".aboutBtn").bind('click', { id: '#aboutUs_link' }, scroller);
             $(".contactBtn").bind('click', { id: '#contact' }, scroller);
             
             function scroller(event){
