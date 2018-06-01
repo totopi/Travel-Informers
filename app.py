@@ -55,10 +55,8 @@ def give_them_graphs(city_name, month, x):
     time_layout = {
         'title': f'{foo} Over Time',
         'xaxis': {
-            'tickangle': 90,
-            'autotick': False,
-            'tick0': 0,
-            'dtick': 3
+            'tickangle': -75,
+            'autotick': False
         },
         'yaxis': {
             'title': f'{foo}'

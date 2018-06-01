@@ -52,10 +52,10 @@ def sql_temp_timeseries_data(city, month, files):
         x = []
         y = []
         for row in session.query(getattr(temp_list[i], city), temp_list[i].datetime).filter(temp_list[i].datetime.like(f'%2015-{month}%')).all():
-            if (type(row[1]) == str):
-                time_converted = dt.datetime.strptime(row[1], '%Y-%m-%d')
-                x.append(time_converted)
-            elif (type(row[1] == dt.datetime)):
+            if type(row[1]) == dt.datetime:
+                foo = dt.datetime.strftime(row[1], '%Y-%m-%d')
+                x.append(foo)
+            else:
                 x.append(row[1])
             y.append(float(row[0]))
         trace = {

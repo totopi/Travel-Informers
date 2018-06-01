@@ -57,7 +57,7 @@ def csv_timeseries_data(city, month, files, foo):
         df = df[[f'{city}', 'datetime']][(df['Year'] == '2015') & (df['Month'] == month)]
         df = df.to_dict('list')
         trace = {
-            'x': [dt.datetime.strptime(x, '%Y-%m-%d') for x in df['datetime']],
+            'x': df['datetime'],
             'y': df[city],
             'type': 'scatter',
             'name': city + ' ' + foo[i],
