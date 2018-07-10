@@ -5,6 +5,12 @@
 
 To create a travel aid that will let you know about weather and flight delays in certain destination cities.
 
+Includes
+* A timeseries graph for whichever weather variable you've chosen
+* A scatter plot showing that weather variable against airport delays in that city,  
+* A donut chart showing the most frequent weather descriptors for that city, color coded by weather type
+* A collage of images from that city scraped from Wikipedia
+
 ### Member Responsibilities
 * Chris Prabhu: Data and API Exploration, Graphs
 * Corey Clippinger: SQL Server, Weather Data Cleaning, Wikipedia Scrape Script
