@@ -1,4 +1,4 @@
-# [Travel-Informers] (https://travel-informers.herokuapp.com/)
+# [Travel-Informers](https://travel-informers.herokuapp.com/)
 ![screenshot1](screenshot1.png)
 
 ## Goal
