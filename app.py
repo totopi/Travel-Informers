@@ -59,7 +59,8 @@ def give_them_graphs(city_name, month, x):
             'autotick': False
         },
         'yaxis': {
-            'title': f'{foo}'
+            'title': f'{foo}',
+            'autosize': True
         }
     }
     scatter_layout = {
@@ -68,7 +69,8 @@ def give_them_graphs(city_name, month, x):
             'title': f'{foo}'
         },
         'yaxis': {
-            'title': 'Number of Airport Delays'
+            'title': 'Number of Airport Delays',
+            'autosize': True
         }
     }
     pie_layout = {
